@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Детали студента</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin-top: 30px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1, h3 {
+            color: #343a40;
+            text-align: center;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .btn {
+            margin-top: 20px;
+        }
+        .row {
+            display: flex;
+            justify-content: space-between;
+        }
+        .col-half {
+            width: 48%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Информация о водителе</h1>
+    <div class="row">
+        <div class="col-half">
+            <h3>Основные данные</h3>
+            <div class="form-group">
+                <label>Фамилия:</label>
+                <p th:text="${driver.firstName}"></p>
+            </div>
+
+            <div class="form-group">
+                <label>Имя:</label>
+                <p th:text="${driver.lastName}"></p>
+            </div>
+
+            <div class="form-group">
+                <label>Отчество:</label>
+                <p th:text="${driver.licenseNumber}"></p>
+            </div>
+        </div>
+    </div>
+    <a th:href="@{'/drivers/list'}" class="btn btn-secondary btn-block">Назад</a>
+</div>
+</body>
+</html>

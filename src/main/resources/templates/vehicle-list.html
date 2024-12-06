@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Список ТС</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1>Список транспортных средств</h1>
+
+  <a th:href="@{'/'}" class="btn btn-secondary mb-3">Вернуться на главную</a>
+
+  <a th:href="@{'/vehicles/create'}" class="btn btn-primary mb-3">Добавить ТС</a>
+
+  <form th:action="@{/vehicles/search}" method="get">
+    <input type="text" name="keyword" placeholder="Введите тип или номер ТС" class="form-control mb-3"/>
+    <button type="submit" class="btn btn-primary">Поиск</button>
+  </form>
+
+  <span th:if="${vehicles.size() == 0}">Список транспортных средств пуст</span>
+
+  <table th:if="${vehicles.size() > 0}" class="table table-hover">
+    <thead class="thead-dark">
+    <tr>
+      <th>Тип ТС</th>
+      <th>Номер ТС</th>
+      <th>Вместимость</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="vehicle : ${vehicles}">
+      <td th:text="${vehicle.vehicleType}"></td>
+      <td th:text="${vehicle.vehicleNumber}"></td>
+      <td th:text="${vehicle.capacity}"></td>
+      <td><a th:href="@{'/vehicles/details/' + ${vehicle.id}}" class="btn btn-info">Подробнее</a></td>
+      <td><a th:href="@{'/vehicles/edit/' + ${vehicle.id}}" class="btn btn-secondary">Изменить</a></td>
+      <td><a th:href="@{'/vehicles/delete/' + ${vehicle.id}}" class="btn btn-danger">Удалить</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

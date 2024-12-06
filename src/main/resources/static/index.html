@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bus Company App</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Bus Company Management</h1>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+      <div class="card text-white bg-secondary mb-3">
+        <div class="card-header">Routes</div>
+        <div class="card-body">
+          <p class="card-text">Manage routes, schedules, and related data.</p>
+          <a href="/routes/list" class="btn btn-light">View Routes</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card text-white bg-primary mb-3">
+        <div class="card-header">Trips</div>
+        <div class="card-body">
+          <p class="card-text">Manage trips, schedules, and related data.</p>
+          <a href="/trips/list" class="btn btn-light">View Trips</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card text-white bg-success mb-3">
+        <div class="card-header">Drivers</div>
+        <div class="card-body">
+          <p class="card-text">View and manage drivers' data.</p>
+          <a href="/drivers/list" class="btn btn-light">View Drivers</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card text-white bg-warning mb-3">
+        <div class="card-header">Vehicles</div>
+        <div class="card-body">
+          <p class="card-text">Manage your fleet of vehicles.</p>
+          <a href="/vehicles/list" class="btn btn-light">View Vehicles</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card text-white bg-danger mb-3">
+        <div class="card-header">Passenger</div>
+        <div class="card-body">
+          <p class="card-text">Manage passenger data and related operations.</p>
+          <a href="/passengers/list" class="btn btn-light">View Passengers</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card text-white bg-info mb-3">
+        <div class="card-header">Schedule</div>
+        <div class="card-body">
+          <p class="card-text">Manage and view schedules.</p>
+          <a href="/schedules/list" class="btn btn-light">View Schedule</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

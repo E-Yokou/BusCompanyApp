@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Редактировать маршрут</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1>Редактировать маршрут</h1>
+
+  <form th:action="@{/routes/edit}" th:object="${route}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+
+    <div class="form-group">
+      <label for="startLocation">Место отправления</label>
+      <input type="text" class="form-control" id="startLocation" th:field="*{startLocation}" required>
+      <div th:if="${#fields.hasErrors('startLocation')}" class="text-danger">
+        <span th:errors="*{startLocation}"></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="endLocation">Место назначения</label>
+      <input type="text" class="form-control" id="endLocation" th:field="*{endLocation}" required>
+      <div th:if="${#fields.hasErrors('endLocation')}" class="text-danger">
+        <span th:errors="*{endLocation}"></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Описание</label>
+      <textarea class="form-control" id="description" th:field="*{description}"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">Сохранить</button>
+    <a th:href="@{/routes/list}" class="btn btn-secondary">Назад</a>
+  </form>
+</div>
+</body>
+</html>

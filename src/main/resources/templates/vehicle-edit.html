@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Редактировать ТС</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1>Редактировать транспортное средство</h1>
+
+  <form th:action="@{/vehicles/edit}" th:object="${vehicle}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+
+    <div class="form-group">
+      <label for="vehicleType">Тип ТС</label>
+      <input type="text" class="form-control" id="vehicleType" th:field="*{vehicleType}" required>
+      <div th:if="${#fields.hasErrors('vehicleType')}" class="text-danger">
+        <span th:errors="*{vehicleType}"></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="vehicleNumber">Номер ТС</label>
+      <input type="text" class="form-control" id="vehicleNumber" th:field="*{vehicleNumber}" required>
+      <div th:if="${#fields.hasErrors('vehicleNumber')}" class="text-danger">
+        <span th:errors="*{vehicleNumber}"></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="capacity">Вместимость</label>
+      <input type="number" class="form-control" id="capacity" th:field="*{capacity}" required>
+      <div th:if="${#fields.hasErrors('capacity')}" class="text-danger">
+        <span th:errors="*{capacity}"></span>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Сохранить</button>
+    <a th:href="@{'/vehicles/list'}" class="btn btn-secondary">Назад</a>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать расписание</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Редактировать расписание</h1>
+    <form th:action="@{/schedules/edit}" th:object="${schedule}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="form-group">
+            <label for="driver">Водитель</label>
+            <select class="form-control" id="driver" th:field="*{driver.id}" required>
+                <option th:each="driver : ${drivers}" th:value="${driver.id}" th:text="${driver.firstName} + ' ' + ${driver.lastName}"></option>
+            </select>
+            <div th:if="${#fields.hasErrors('driver')}" class="text-danger">
+                <span th:errors="*{driver}"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="vehicle">Транспортное средство</label>
+            <select class="form-control" id="vehicle" th:field="*{vehicle.id}" required>
+                <option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}" th:text="${vehicle.vehicleNumber}"></option>
+            </select>
+            <div th:if="${#fields.hasErrors('vehicle')}" class="text-danger">
+                <span th:errors="*{vehicle}"></span>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="trip">Рейс</label>
+            <select class="form-control" id="trip" th:field="*{trip.id}" required>
+                <option th:each="trip : ${trips}" th:value="${trip.id}" th:text="${trip.tripNumber}"></option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Сохранить</button>
+        <a th:href="@{'/schedules/list'}" class="btn btn-secondary">Назад</a>
+    </form>
+</div>
+</body>
+</html>

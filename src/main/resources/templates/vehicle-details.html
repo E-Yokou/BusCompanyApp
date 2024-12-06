@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Детали ТС</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1>Информация о транспортном средстве</h1>
+
+  <div class="form-group">
+    <label>Тип ТС:</label>
+    <p th:text="${vehicle.vehicleType}"></p>
+  </div>
+
+  <div class="form-group">
+    <label>Номер ТС:</label>
+    <p th:text="${vehicle.vehicleNumber}"></p>
+  </div>
+
+  <div class="form-group">
+    <label>Вместимость:</label>
+    <p th:text="${vehicle.capacity}"></p>
+  </div>
+
+  <a th:href="@{'/vehicles/list'}" class="btn btn-secondary">Назад</a>
+</div>
+</body>
+</html>

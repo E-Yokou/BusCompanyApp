@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Список студентов</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Список водителей</h1>
+
+    <a th:href="@{'/'}" class="btn btn-secondary mb-3">Вернуться на главную</a>
+
+    <a th:href="@{'/drivers/create'}" class="btn btn-primary mb-3">Добавить водителя</a>
+
+    <form th:action="@{/drivers/search}" method="get">
+        <input type="text" name="keyword" placeholder="Введите фамилию, имя или водительское удостоверение" class="form-control"/>
+        <button type="submit" class="btn btn-primary">Поиск</button>
+    </form>
+
+    <p></p>
+
+    <span th:if="${drivers.size() == 0}">Список водителей пуст</span>
+
+    <table th:if="${drivers.size() > 0}" class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Водит. удостоверение</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="driver : ${drivers}">
+            <td th:text="${driver.lastName}"></td>
+            <td th:text="${driver.firstName}"></td>
+            <td th:text="${driver.licenseNumber}"></td>
+            <td>
+                <a th:href="@{'/drivers/details/' + ${driver.id}}" class="btn btn-info">Подробнее</a>
+            </td>
+            <td>
+                <a th:href="@{'/drivers/edit/' + ${driver.id}}" class="btn btn-secondary">Изменить</a>
+            </td>
+            <td>
+                <a th:href="@{'/drivers/delete/' + ${driver.id}}" class="btn btn-danger">Удалить</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

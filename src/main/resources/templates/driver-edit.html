@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Редактировать студента</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      max-width: 1200px;
+      margin-top: 30px;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    h1, h3 {
+      color: #343a40;
+      text-align: center;
+    }
+    .form-group label {
+      font-weight: bold;
+    }
+    .btn {
+      margin-top: 20px;
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+    }
+    .col-half {
+      width: 48%;
+    }
+    .text-danger {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Редактировать водителя</h1>
+
+  <div th:if="${successMessage}" class="alert alert-success">
+    <p th:text="${successMessage}"></p>
+  </div>
+
+  <form th:action="@{/drivers/edit}" th:object="${drivers}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+
+    <div class="row">
+        <h3>Основные данные</h3>
+
+        <div class="form-group">
+          <label for="firstName">Фамилия</label>
+          <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required>
+          <div th:if="${#fields.hasErrors('firstName')}" class="text-danger">
+            <span th:errors="*{firstName}"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Имя</label>
+          <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required>
+          <div th:if="${#fields.hasErrors('lastName')}" class="text-danger">
+            <span th:errors="*{lastName}"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="licenseNumber">Водительское удостоверение</label>
+          <input type="text" class="form-control" id="licenseNumber" th:field="*{licenseNumber}">
+          <div th:if="${#fields.hasErrors('licenseNumber')}" class="text-danger">
+            <span th:errors="*{licenseNumber}"></span>
+          </div>
+        </div>
+    <button type="submit" class="btn btn-success btn-block">Сохранить</button>
+    <a th:href="@{'/drivers/list'}" class="btn btn-secondary btn-block">Назад</a>
+    </div>
+  </form>
+</div>
+</body>
+</html>

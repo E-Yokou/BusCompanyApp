@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Добавить поездку</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1>Добавить новую поездку</h1>
+  <form th:action="@{/trips/create}" th:object="${trip}" method="post">
+    <div class="form-group">
+      <label for="tripNumber">Номер поездки</label>
+      <input type="text" class="form-control" id="tripNumber" th:field="*{tripNumber}" required>
+    </div>
+
+    <div class="form-group">
+      <label for="departureLocation">Место отправления</label>
+      <input type="text" class="form-control" id="departureLocation" th:field="*{departureLocation}" required>
+    </div>
+
+    <div class="form-group">
+      <label for="destinationLocation">Место назначения</label>
+      <input type="text" class="form-control" id="destinationLocation" th:field="*{destinationLocation}" required>
+    </div>
+
+    <div class="form-group">
+      <label for="departureDatetime">Дата и время отправления</label>
+      <input type="datetime-local" class="form-control" id="departureDatetime" th:field="*{departureDatetime}" required>
+    </div>
+
+    <div class="form-group">
+      <label for="arrivalDatetime">Дата и время прибытия</label>
+      <input type="datetime-local" class="form-control" id="arrivalDatetime" th:field="*{arrivalDatetime}" required>
+    </div>
+
+    <div class="form-group">
+      <label for="vehicle">Vehicle</label>
+      <select class="form-control" id="vehicle" th:field="*{vehicle}" required>
+        <option th:each="vehicle : ${vehicles}"
+                th:value="${vehicle.id}"
+                th:text="${vehicle.vehicleType}"></option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="route">Route</label>
+      <select class="form-control" id="route" th:field="*{route}" required>
+        <option th:each="route : ${routes}"
+                th:value="${route.id}"
+                th:text="${route.startLocation} + ' - ' + ${route.endLocation}"></option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="driver">Driver</label>
+      <select class="form-control" id="driver" th:field="*{driver}" required>
+        <option th:each="driver : ${drivers}"
+                th:value="${driver.id}"
+                th:text="${driver.firstName + ' ' + driver.lastName}"></option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Сохранить</button>
+    <a th:href="@{'/trips/list'}" class="btn btn-secondary">Назад</a>
+  </form>
+</div>
+</body>
+</html>
