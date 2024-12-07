@@ -46,7 +46,7 @@
     <p th:text="${successMessage}"></p>
   </div>
 
-  <form th:action="@{/drivers/edit}" th:object="${drivers}" method="post">
+  <form th:action="@{/templates/driver/edit}" th:object="${drivers}" method="post">
     <input type="hidden" th:field="*{id}"/>
 
     <div class="row">

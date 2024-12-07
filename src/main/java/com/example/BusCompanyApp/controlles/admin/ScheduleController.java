@@ -1,4 +1,4 @@
-package com.example.BusCompanyApp.controlles;
+package com.example.BusCompanyApp.controlles.admin;
 
 import com.example.BusCompanyApp.models.*;
 import com.example.BusCompanyApp.services.*;
@@ -9,11 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/schedules")

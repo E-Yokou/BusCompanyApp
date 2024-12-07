@@ -9,7 +9,7 @@
 <div class="container">
   <h1>Добавить нового водителя</h1>
 
-  <form th:action="@{/drivers/create}" th:object="${drivers}" method="post">
+  <form th:action="@{/templates/driver/create}" th:object="${drivers}" method="post">
     <div class="form-group">
       <label for="firstName">Имя</label>
       <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required>

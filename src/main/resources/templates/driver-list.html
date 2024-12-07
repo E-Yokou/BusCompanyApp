@@ -13,7 +13,7 @@
 
     <a th:href="@{'/drivers/create'}" class="btn btn-primary mb-3">Добавить водителя</a>
 
-    <form th:action="@{/drivers/search}" method="get">
+    <form th:action="@{/templates/driver/search}" method="get">
         <input type="text" name="keyword" placeholder="Введите фамилию, имя или водительское удостоверение" class="form-control"/>
         <button type="submit" class="btn btn-primary">Поиск</button>
     </form>

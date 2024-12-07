@@ -1,4 +1,4 @@
-package com.example.BusCompanyApp.controlles;
+package com.example.BusCompanyApp.controlles.admin;
 
 import com.example.BusCompanyApp.models.Vehicle;
 import com.example.BusCompanyApp.services.VehicleService;

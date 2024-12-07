@@ -1,4 +1,4 @@
-package com.example.BusCompanyApp.controlles;
+package com.example.BusCompanyApp.controlles.admin;
 
 import com.example.BusCompanyApp.models.Driver;
 import com.example.BusCompanyApp.services.DriverService;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/drivers")
+@RequestMapping("admin/drivers")
 public class DriverController {
 
     private final DriverService driverService;
