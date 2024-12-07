@@ -1,8 +1,7 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Детали студента</title>
+    <title>Детали водителя</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <style>
         body {
@@ -19,19 +18,6 @@
         h1, h3 {
             color: #343a40;
             text-align: center;
-        }
-        .form-group label {
-            font-weight: bold;
-        }
-        .btn {
-            margin-top: 20px;
-        }
-        .row {
-            display: flex;
-            justify-content: space-between;
-        }
-        .col-half {
-            width: 48%;
         }
     </style>
 </head>
@@ -52,12 +38,12 @@
             </div>
 
             <div class="form-group">
-                <label>Отчество:</label>
+                <label>Удостоверение:</label>
                 <p th:text="${driver.licenseNumber}"></p>
             </div>
         </div>
     </div>
-    <a th:href="@{'/drivers/list'}" class="btn btn-secondary btn-block">Назад</a>
+    <a th:href="@{'/admin/driver/list'}" class="btn btn-secondary btn-block">Назад</a>
 </div>
 </body>
 </html>

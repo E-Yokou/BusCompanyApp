@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Добавить водителя</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1>Добавить нового водителя</h1>
+
+  <form th:action="@{'/admin/driver/create'}" th:object="${drivers}" method="post">
+    <div class="form-group">
+      <label for="firstName">Имя</label>
+      <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required>
+      <div th:if="${#fields.hasErrors('firstName')}" class="text-danger">
+        <span th:errors="*{firstName}"></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Фамилия</label>
+      <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required>
+      <div th:if="${#fields.hasErrors('lastName')}" class="text-danger">
+        <span th:errors="*{lastName}"></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="licenseNumber">Номер водительского удостоверения</label>
+      <input type="text" class="form-control" id="licenseNumber" th:field="*{licenseNumber}" required>
+      <div th:if="${#fields.hasErrors('licenseNumber')}" class="text-danger">
+        <span th:errors="*{licenseNumber}"></span>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Сохранить</button>
+    <a th:href="@{'/admin/driver/list'}" class="btn btn-secondary">Назад</a>
+  </form>
+</div>
+</body>
+</html>

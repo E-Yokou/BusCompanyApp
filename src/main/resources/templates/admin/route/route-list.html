@@ -11,9 +11,9 @@
 
   <a th:href="@{'/'}" class="btn btn-secondary mb-3">Вернуться на главную</a>
 
-  <a th:href="@{'/routes/create'}" class="btn btn-primary mb-3">Добавить маршрут</a>
+  <a th:href="@{'/admin/route/create'}" class="btn btn-primary mb-3">Добавить маршрут</a>
 
-  <form th:action="@{/routes/search}" method="get">
+  <form th:action="@{'/admin/route/search'}" method="get">
     <input type="text" name="keyword" placeholder="Введите место отправления или назначения" class="form-control"/>
     <button type="submit" class="btn btn-primary">Поиск</button>
   </form>
@@ -39,13 +39,13 @@
       <td th:text="${route.endLocation}"></td>
       <td th:text="${route.description}"></td>
       <td>
-        <a th:href="@{'/routes/details/' + ${route.id}}" class="btn btn-info">Подробнее</a>
+        <a th:href="@{'/admin/route/details/' + ${route.id}}" class="btn btn-info">Подробнее</a>
       </td>
       <td>
-        <a th:href="@{'/routes/edit/' + ${route.id}}" class="btn btn-secondary">Изменить</a>
+        <a th:href="@{'/admin/route/edit/' + ${route.id}}" class="btn btn-secondary">Изменить</a>
       </td>
       <td>
-        <a th:href="@{'/routes/delete/' + ${route.id}}" class="btn btn-danger">Удалить</a>
+        <a th:href="@{'/admin/route/delete/' + ${route.id}}" class="btn btn-danger">Удалить</a>
       </td>
     </tr>
     </tbody>

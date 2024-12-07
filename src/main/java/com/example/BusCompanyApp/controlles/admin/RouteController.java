@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/routes")
+@RequestMapping("/admin/route")
 public class RouteController {
 
     private final RouteService routeService;
@@ -26,24 +26,24 @@ public class RouteController {
     @GetMapping("/list")
     public String listRoutes(Model model) {
         model.addAttribute("routes", routeService.findAllRoutes());
-        return "route-list";
+        return "admin/route/route-list";
     }
 
     // Создание нового маршрута
     @GetMapping("/create")
     public String createRouteForm(Model model) {
         model.addAttribute("route", new Route());
-        return "route-create";
+        return "admin/route/route-create";
     }
 
     @PostMapping("/create")
     public String createRoute(@Valid @ModelAttribute Route route, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("route", route);
-            return "route-create";
+            return "admin/route/route-create";
         }
         routeService.saveRoute(route);
-        return "redirect:/routes/list";
+        return "redirect:/admin/route/list";
     }
 
     // Редактирование маршрута
@@ -52,33 +52,33 @@ public class RouteController {
         Optional<Route> route = routeService.findRouteById(id);
         if (route.isPresent()) {
             model.addAttribute("route", route.get());
-            return "route-edit";
+            return "admin/route/route-edit";
         }
-        return "redirect:/routes/list";
+        return "redirect:/admin/route/list";
     }
 
     @PostMapping("/edit")
     public String editRoute(@Valid @ModelAttribute Route route, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("route", route);
-            return "route-edit";
+            return "admin/route/route-edit";
         }
         routeService.saveRoute(route);
-        return "redirect:/routes/list";
+        return "redirect:/admin/route/list";
     }
 
     // Удаление маршрута
     @GetMapping("/delete/{id}")
     public String deleteRoute(@PathVariable("id") Long id) {
         routeService.deleteRouteById(id);
-        return "redirect:/routes/list";
+        return "redirect:/admin/route/list";
     }
 
     // Поиск маршрутов
     @GetMapping("/search")
     public String searchRoute(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
         model.addAttribute("routes", routeService.searchRoutesByKeyword(keyword));
-        return "route-list";
+        return "admin/route/route-list";
     }
 
     // Детали маршрута
@@ -90,6 +90,6 @@ public class RouteController {
         } else {
             return "error";
         }
-        return "route-details";
+        return "admin/route/route-details";
     }
 }

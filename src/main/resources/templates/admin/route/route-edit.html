@@ -9,7 +9,7 @@
 <div class="container">
   <h1>Редактировать маршрут</h1>
 
-  <form th:action="@{/routes/edit}" th:object="${route}" method="post">
+  <form th:action="@{'/admin/route/edit'}" th:object="${route}" method="post">
     <input type="hidden" th:field="*{id}"/>
 
     <div class="form-group">
@@ -34,7 +34,7 @@
     </div>
 
     <button type="submit" class="btn btn-success">Сохранить</button>
-    <a th:href="@{/routes/list}" class="btn btn-secondary">Назад</a>
+    <a th:href="@{'/admin/route/list'}" class="btn btn-secondary">Назад</a>
   </form>
 </div>
 </body>

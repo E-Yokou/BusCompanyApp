@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/vehicles")
+@RequestMapping("/admin/vehicle")
 public class VehicleController {
 
     private final VehicleService vehicleService;
@@ -25,23 +25,23 @@ public class VehicleController {
     @GetMapping("/list")
     public String listVehicles(Model model) {
         model.addAttribute("vehicles", vehicleService.findAllVehicles());
-        return "vehicle-list";
+        return "admin/vehicle/vehicle-list";
     }
 
     @GetMapping("/create")
     public String createVehicleForm(Model model) {
         model.addAttribute("vehicle", new Vehicle());
-        return "vehicle-create";
+        return "admin/vehicle/vehicle-create";
     }
 
     @PostMapping("/create")
     public String createVehicle(@Valid @ModelAttribute Vehicle vehicle, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("vehicle", vehicle);
-            return "vehicle-create";
+            return "admin/vehicle/vehicle-create";
         }
         vehicleService.saveVehicle(vehicle);
-        return "redirect:/vehicles/list";
+        return "redirect:/admin/vehicle/list";
     }
 
     @GetMapping("/edit/{id}")
@@ -49,9 +49,9 @@ public class VehicleController {
         Optional<Vehicle> vehicle = vehicleService.findVehicleById(id);
         if (vehicle.isPresent()) {
             model.addAttribute("vehicle", vehicle.get());
-            return "vehicle-edit";
+            return "admin/vehicle/vehicle-edit";
         }
-        return "redirect:/vehicles/list";
+        return "redirect:/admin/vehicle/list";
     }
 
     @PostMapping("/edit")
@@ -61,19 +61,19 @@ public class VehicleController {
             return "vehicle-edit";
         }
         vehicleService.saveVehicle(vehicle);
-        return "redirect:/vehicles/list";
+        return "redirect:/admin/vehicle/list";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteVehicle(@PathVariable("id") Long id) {
         vehicleService.deleteVehicleById(id);
-        return "redirect:/vehicles/list";
+        return "redirect:/admin/vehicle/list";
     }
 
     @GetMapping("/search")
     public String searchVehicle(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
         model.addAttribute("vehicles", vehicleService.searchVehiclesByKeyword(keyword));
-        return "vehicle-list";
+        return "admin/vehicle/vehicle-list";
     }
 
     @GetMapping("/details/{id}")
@@ -84,6 +84,6 @@ public class VehicleController {
         } else {
             return "error";
         }
-        return "vehicle-details";
+        return "admin/vehicle/vehicle-details";
     }
 }
