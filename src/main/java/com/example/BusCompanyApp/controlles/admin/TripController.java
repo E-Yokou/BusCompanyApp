@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/trips")
+@RequestMapping("admin/trip")
 public class TripController {
 
     private final TripService tripService;
@@ -37,7 +37,7 @@ public class TripController {
     @GetMapping("/list")
     public String listTrips(Model model) {
         model.addAttribute("trips", tripService.findAllTrips());
-        return "trip-list";
+        return "admin/trip/trip-list";
     }
 
     @GetMapping("/create")
@@ -46,7 +46,7 @@ public class TripController {
         model.addAttribute("vehicles", vehicleService.findAllVehicles());
         model.addAttribute("routes", routeService.findAllRoutes());
         model.addAttribute("drivers", driverService.findAllDrivers()); // Новый сервис
-        return "trip-create";
+        return "admin/trip/trip-create";
     }
 
 
@@ -56,7 +56,7 @@ public class TripController {
             model.addAttribute("vehicles", vehicleService.findAllVehicles());
             model.addAttribute("routes", routeService.findAllRoutes());
             model.addAttribute("drivers", driverService.findAllDrivers());
-            return "trip-create";
+            return "admin/trip/trip-create";
         }
 
         trip.setOccupied_seats(0); // Начальное значение
@@ -68,7 +68,7 @@ public class TripController {
         schedule.setDriver(trip.getDriver());
         scheduleService.saveSchedule(schedule);
 
-        return "redirect:/trips/list";
+        return "redirect:/admin/trip/list";
     }
 
     @GetMapping("/edit/{id}")
@@ -81,7 +81,7 @@ public class TripController {
         model.addAttribute("vehicles", vehicles);
         model.addAttribute("routes", routes);
 
-        return "trip-edit"; // This refers to the template name
+        return "admin/trip/trip-edit";
     }
 
 
@@ -89,22 +89,16 @@ public class TripController {
     public String editTrip(@Valid @ModelAttribute Trip trip, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("trip", trip);
-            return "trip-edit";
+            return "admin/trip/trip-edit";
         }
         tripService.saveTrip(trip);
-        return "redirect:/trips/list";
+        return "redirect:/admin/trip/list";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteTrip(@PathVariable("id") Long id) {
         tripService.deleteTripById(id);
-        return "redirect:/trips/list";
-    }
-
-    @GetMapping("/search")
-    public String searchTrip(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
-        model.addAttribute("trips", tripService.searchTripsByKeyword(keyword));
-        return "trip-list";
+        return "redirect:/admin/trip/list";
     }
 
     @GetMapping("/details/{id}")
@@ -115,6 +109,6 @@ public class TripController {
         } else {
             return "error";
         }
-        return "trip-details";
+        return "admin/trip/trip-details";
     }
 }

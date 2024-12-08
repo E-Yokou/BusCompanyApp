@@ -9,7 +9,7 @@
     <h1>Список расписаний</h1>
 
     <a th:href="@{'/'}" class="btn btn-secondary mb-3">Вернуться на главную</a>
-    <a th:href="@{/schedules/create}" class="btn btn-primary mb-3">Добавить расписание</a>
+    <a th:href="@{'/admin/schedule/create'}" class="btn btn-primary mb-3">Добавить расписание</a>
 
     <table class="table">
         <thead>
@@ -29,6 +29,11 @@
             <td th:text="${schedule.trip.route.startLocation} + ' - ' + ${schedule.trip.route.endLocation}"></td>
             <td th:text="${schedule.vehicle.vehicleNumber}"></td>
             <td th:text="${schedule.driver.firstName} + ' ' + ${schedule.driver.lastName}"></td>
+
+            <td>
+                <a th:href="@{'/admin/schedule/details/' + ${schedule.id}}" class="btn btn-secondary">Детали</a>
+            </td>
+
         </tr>
         </tbody>
     </table>

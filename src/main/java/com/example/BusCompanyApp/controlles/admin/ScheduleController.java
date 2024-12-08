@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/schedules")
+@RequestMapping("admin/schedule")
 public class ScheduleController {
 
     private final ScheduleService scheduleService;
@@ -32,25 +32,25 @@ public class ScheduleController {
     @GetMapping("/list")
     public String listSchedules(Model model) {
         model.addAttribute("schedules", scheduleService.findAllSchedules());
-        return "schedule-list";
+        return "admin/schedule/schedule-list";
     }
 
     @GetMapping("/create")
     public String createScheduleForm(Model model) {
         model.addAttribute("schedule", new Schedule());
         loadDropdownData(model);
-        return "schedule-create";
+        return "admin/schedule/schedule-create";
     }
 
     @PostMapping("/create")
     public String createSchedule(@Valid @ModelAttribute Schedule schedule, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             loadDropdownData(model);
-            return "schedule-create";
+            return "admin/schedule/schedule-create";
         }
 
         scheduleService.saveSchedule(schedule);
-        return "redirect:/schedules/list";
+        return "redirect:/admin/schedule/list";
     }
 
     @GetMapping("/edit/{id}")
@@ -60,18 +60,18 @@ public class ScheduleController {
 
         model.addAttribute("schedule", schedule);
         loadDropdownData(model);
-        return "schedule-edit";
+        return "admin/schedule/schedule-edit";
     }
 
     @PostMapping("/edit")
     public String editSchedule(@Valid @ModelAttribute Schedule schedule, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             loadDropdownData(model);
-            return "schedule-edit";
+            return "admin/schedule/schedule-edit";
         }
 
         scheduleService.saveSchedule(schedule);
-        return "redirect:/schedules/list";
+        return "redirect:/admin/schedule/list";
     }
 
     // Вспомогательный метод для загрузки данных выпадающих списков
@@ -88,7 +88,7 @@ public class ScheduleController {
     @GetMapping("/delete/{id}")
     public String deleteSchedule(@PathVariable("id") Long id) {
         scheduleService.deleteScheduleById(id);
-        return "redirect:/schedules/list";
+        return "redirect:/admin/schedule/list";
     }
 
     @GetMapping("/details/{id}")
@@ -99,6 +99,6 @@ public class ScheduleController {
         } else {
             return "error";
         }
-        return "schedule-details";
+        return "admin/schedule/schedule-details";
     }
 }

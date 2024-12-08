@@ -1,14 +1,19 @@
 package com.example.BusCompanyApp.services;
 
 import com.example.BusCompanyApp.models.Role;
+import com.example.BusCompanyApp.models.Trip;
 import com.example.BusCompanyApp.models.User;
 import com.example.BusCompanyApp.models.UserRegistrationDto;
 import com.example.BusCompanyApp.repositories.RoleRepository;
+import com.example.BusCompanyApp.repositories.TripRepository;
 import com.example.BusCompanyApp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +22,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private TripRepository tripRepository;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -47,21 +55,26 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User updateUser(Long userId, User userDetails) {
-        Optional<User> user = userRepository.findById(userId);
-        if (user.isPresent()) {
-            User curUser = user.get();
-            curUser.setUserLogin(userDetails.getUserLogin());
-            curUser.setUserPassword(userDetails.getUserPassword());
-            curUser.setUserEmail(userDetails.getUserEmail());
-            curUser.setUserRole(userDetails.getUserRole());
-            return userRepository.save(curUser);
-        }
-        return null;
-    }
-
     public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
+    }
+
+    public List<Trip> findTrips(String departureLocation, String destinationLocation) {
+        return userRepository.findTripsByLocations(departureLocation, destinationLocation);
+    }
+
+    public List<String> getAllDepartureLocations() {
+        return userRepository.findDistinctDepartureLocations();
+    }
+
+    public List<String> getAllArrivalLocations() {
+        return userRepository.findDistinctArrivalLocations();
+    }
+
+    public User getCurrentUser() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<User> userOptional = userRepository.findByUserLogin(userDetails.getUsername());
+        return userOptional.orElseThrow(() -> new RuntimeException("User not found"));
     }
 }
 

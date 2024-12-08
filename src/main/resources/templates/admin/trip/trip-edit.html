@@ -8,7 +8,7 @@
 <body>
 <div class="container">
   <h1>Редактировать поездку</h1>
-  <form th:action="@{/trips/edit}" th:object="${trip}" method="post">
+  <form th:action="@{'/admin/trip/edit'}" th:object="${trip}" method="post">
     <input type="hidden" th:field="*{id}"/>
 
     <div class="form-group">
@@ -63,7 +63,7 @@
 
 
     <button type="submit" class="btn btn-success">Сохранить</button>
-    <a th:href="@{'/trips/list'}" class="btn btn-secondary">Назад</a>
+    <a th:href="@{'/admin/trip/list'}" class="btn btn-secondary">Назад</a>
   </form>
 </div>
 </body>

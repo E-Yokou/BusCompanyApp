@@ -11,9 +11,9 @@
 
   <a th:href="@{'/'}" class="btn btn-secondary mb-3">Вернуться на главную</a>
 
-  <a th:href="@{'/trips/create'}" class="btn btn-primary mb-3">Добавить поездку</a>
+  <a th:href="@{'/admin/trip/create'}" class="btn btn-primary mb-3">Добавить поездку</a>
 
-  <form th:action="@{/trips/search}" method="get" class="mb-3">
+  <form th:action="@{'/admin/trip/search'}" method="get" class="mb-3">
     <input type="text" name="keyword" placeholder="Введите номер рейса, пункт отправления или назначения" class="form-control"/>
     <button type="submit" class="btn btn-primary mt-2">Поиск</button>
   </form>
@@ -51,13 +51,13 @@
       <td th:text="${trip.vehicle.capacity - trip.occupied_seats}"></td>
 
       <td>
-        <a th:href="@{'/trips/details/' + ${trip.id}}" class="btn btn-info">Подробнее</a>
+        <a th:href="@{'/admin/trip/details/' + ${trip.id}}" class="btn btn-info">Подробнее</a>
       </td>
       <td>
-        <a th:href="@{'/trips/edit/' + ${trip.id}}" class="btn btn-secondary">Изменить</a>
+        <a th:href="@{'/admin/trip/edit/' + ${trip.id}}" class="btn btn-secondary">Изменить</a>
       </td>
       <td>
-        <a th:href="@{'/trips/delete/' + ${trip.id}}" class="btn btn-danger">Удалить</a>
+        <a th:href="@{'/admin/trip/delete/' + ${trip.id}}" class="btn btn-danger">Удалить</a>
       </td>
     </tr>
     </tbody>
