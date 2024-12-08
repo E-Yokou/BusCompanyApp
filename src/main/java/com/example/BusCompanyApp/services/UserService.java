@@ -63,12 +63,12 @@ public class UserService {
         return userRepository.findTripsByLocations(departureLocation, destinationLocation);
     }
 
-    public List<String> getAllDepartureLocations() {
-        return userRepository.findDistinctDepartureLocations();
+    public List<String> getDepartureLocationsByQuery(String query) {
+        return tripRepository.findDepartureLocationsByQuery(query);
     }
 
-    public List<String> getAllArrivalLocations() {
-        return userRepository.findDistinctArrivalLocations();
+    public List<String> getArrivalLocationsByQuery(String query) {
+        return tripRepository.findArrivalLocationsByQuery(query);
     }
 
     public User getCurrentUser() {

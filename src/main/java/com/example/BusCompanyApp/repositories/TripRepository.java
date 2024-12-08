@@ -15,4 +15,10 @@ public interface TripRepository extends JpaRepository<Trip, Long> {
             "LOWER(t.departureLocation) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(t.destinationLocation) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<Trip> searchByKeyword(@Param("keyword") String keyword);
+
+    @Query("SELECT DISTINCT t.departureLocation FROM Trip t WHERE t.departureLocation LIKE %:query%")
+    List<String> findDepartureLocationsByQuery(@Param("query") String query);
+
+    @Query("SELECT DISTINCT t.destinationLocation FROM Trip t WHERE t.destinationLocation LIKE %:query%")
+    List<String> findArrivalLocationsByQuery(@Param("query") String query);
 }

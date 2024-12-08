@@ -14,6 +14,18 @@
     <p><strong>Имя:</strong> <span th:text="${user.userLogin}"></span></p>
     <p><strong>Почта:</strong> <span th:text="${user.userEmail}"></span></p>
   </div>
+  <div class="tickets-container">
+    <h2>Мои билеты</h2>
+    <div th:each="ticket : ${tickets}" class="ticket-item">
+      <p><strong>Номер рейса:</strong> <span th:text="${ticket.trip.tripNumber}"></span></p>
+      <p><strong>Маршрут:</strong> <span th:text="${ticket.trip.route.startLocation} + ' → ' + ${ticket.trip.route.endLocation}"></span></p>
+      <p><strong>Откуда:</strong> <span th:text="${ticket.trip.departureLocation}"></span></p>
+      <p><strong>Куда:</strong> <span th:text="${ticket.trip.destinationLocation}"></span></p>
+      <p><strong>Цена:</strong> <span th:text="${ticket.price}"></span></p>
+      <p><strong>Дата и время отправления:</strong> <span th:text="${#temporals.format(ticket.trip.departureDatetime, 'dd-MM-yyyy HH:mm')}"></span></p>
+      <p><strong>Дата и время прибытия:</strong> <span th:text="${#temporals.format(ticket.trip.arrivalDatetime, 'dd-MM-yyyy HH:mm')}"></span></p>
+    </div>
+  </div>
   <button class="logout-button" onclick="logout()">Выйти</button>
   <a th:href="@{'/'}" class="back-button">Назад</a>
 </div>

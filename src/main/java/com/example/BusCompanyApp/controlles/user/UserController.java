@@ -39,28 +39,40 @@ public class UserController {
 
     @GetMapping("/departure-locations")
     @ResponseBody
-    public List<String> getDepartureLocations() {
-        return userService.getAllDepartureLocations();
+    public List<String> getDepartureLocations(@RequestParam("query") String query) {
+        return userService.getDepartureLocationsByQuery(query);
     }
 
     @GetMapping("/arrival-locations")
     @ResponseBody
-    public List<String> getArrivalLocations() {
-        return userService.getAllArrivalLocations();
+    public List<String> getArrivalLocations(@RequestParam("query") String query) {
+        return userService.getArrivalLocationsByQuery(query);
     }
 
     @GetMapping("/user-profile")
     public String userProfile(Model model) {
         User user = userService.getCurrentUser();
+        List<Ticket> tickets = ticketService.getTicketsByUser(user);
         model.addAttribute("user", user);
+        model.addAttribute("tickets", tickets);
         return "user/user-profile";
     }
 
     @PostMapping("/buy-ticket")
     public String buyTicket(@RequestParam("tripId") Long tripId, @RequestParam("price") Double price, Model model) {
-        User user = userService.getCurrentUser(); // Предполагается, что этот метод возвращает текущего пользователя
+        User user = userService.getCurrentUser();
         Ticket ticket = ticketService.buyTicket(tripId, user.getUserId(), price);
         model.addAttribute("ticket", ticket);
-        return "user/ticket-confirmation"; // Предполагается, что у вас есть шаблон для подтверждения покупки
+        return "user/ticket-confirmation";
+    }
+
+    @PostMapping("/send-ticket")
+    public String sendTicket(@RequestParam("email") String email, @RequestParam("ticketId") Long ticketId, Model model) {
+        // Логика отправки билета на email
+        // Например, можно использовать сервис для отправки email
+        ticketService.sendTicketEmail(email, ticketId);
+
+        // После отправки билета можно перенаправить пользователя на страницу подтверждения
+        return "redirect:/user/ticket-confirmation";
     }
 }
