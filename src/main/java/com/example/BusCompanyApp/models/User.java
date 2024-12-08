@@ -44,4 +44,12 @@ public class User {
                 ", userRole=" + (userRole != null ? userRole.getRoleId() : null) +
                 '}';
     }
+
+    public String getPassword() {
+        return userPassword;
+    }
+
+    public String getUsername() {
+        return userLogin;
+    }
 }

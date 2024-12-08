@@ -1,15 +1,13 @@
 package com.example.BusCompanyApp.controlles.user;
 
+import com.example.BusCompanyApp.models.Ticket;
 import com.example.BusCompanyApp.models.Trip;
 import com.example.BusCompanyApp.models.User;
+import com.example.BusCompanyApp.services.TicketService;
 import com.example.BusCompanyApp.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,9 +16,11 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final TicketService ticketService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, TicketService tripService) {
         this.userService = userService;
+        this.ticketService = tripService;
     }
 
     @GetMapping
@@ -53,5 +53,13 @@ public class UserController {
         User user = userService.getCurrentUser(); // Предполагается, что этот метод возвращает текущего пользователя
         model.addAttribute("user", user);
         return "user/user-profile";
+    }
+
+    @PostMapping("/buy-ticket")
+    public String buyTicket(@RequestParam("tripId") Long tripId, @RequestParam("price") Double price, Model model) {
+        User user = userService.getCurrentUser(); // Предполагается, что этот метод возвращает текущего пользователя
+        Ticket ticket = ticketService.buyTicket(tripId, user.getUserId(), price);
+        model.addAttribute("ticket", ticket);
+        return "user/ticket-confirmation"; // Предполагается, что у вас есть шаблон для подтверждения покупки
     }
 }

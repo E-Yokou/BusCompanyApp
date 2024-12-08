@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Ticket Confirmation</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container ticket-confirmation">
+  <h1>Ticket Confirmation</h1>
+  <p>Your ticket has been purchased successfully!</p>
+  <p>Ticket ID: <span th:text="${ticket.id}"></span></p>
+  <p>Trip Number: <span th:text="${ticket.trip.tripNumber}"></span></p>
+  <p>Price: <span th:text="${ticket.price}"></span></p>
+</div>
+</body>
+</html>
