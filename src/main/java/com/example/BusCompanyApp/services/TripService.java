@@ -1,12 +1,7 @@
 package com.example.BusCompanyApp.services;
 
-import com.example.BusCompanyApp.models.Driver;
-import com.example.BusCompanyApp.models.Route;
-import com.example.BusCompanyApp.models.Trip;
-import com.example.BusCompanyApp.models.Vehicle;
-import com.example.BusCompanyApp.repositories.RouteRepository;
-import com.example.BusCompanyApp.repositories.TripRepository;
-import com.example.BusCompanyApp.repositories.VehicleRepository;
+import com.example.BusCompanyApp.models.*;
+import com.example.BusCompanyApp.repositories.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,10 +16,14 @@ import java.util.Optional;
 public class TripService {
 
     private final TripRepository tripRepository;
+    private final UserRepository userRepository;
+    private final TicketRepository ticketRepository;
 
     @Autowired
-    public TripService(TripRepository tripRepository) {
+    public TripService(TripRepository tripRepository, UserRepository userRepository, TicketRepository ticketRepository) {
         this.tripRepository = tripRepository;
+        this.userRepository = userRepository;
+        this.ticketRepository = ticketRepository;
     }
 
     public List<Trip> findAllTrips() {

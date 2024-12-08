@@ -7,6 +7,7 @@ import com.example.BusCompanyApp.repositories.TicketRepository;
 import com.example.BusCompanyApp.repositories.TripRepository;
 import com.example.BusCompanyApp.repositories.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TicketService {
@@ -21,6 +22,7 @@ public class TicketService {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     public Ticket buyTicket(Long tripId, Long userId, Double price) {
         Trip trip = tripRepository.findById(tripId).orElseThrow(() -> new RuntimeException("Trip not found"));
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
@@ -29,6 +31,9 @@ public class TicketService {
         ticket.setUser(user);
         ticket.setTrip(trip);
         ticket.setPrice(price);
+
+        trip.decreaseOccupiedSeats();
+        tripRepository.save(trip);
 
         return ticketRepository.save(ticket);
     }

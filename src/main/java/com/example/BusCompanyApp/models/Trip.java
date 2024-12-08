@@ -54,4 +54,10 @@ public class Trip {
 
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)  // Добавлено каскадное удаление
     private List<Schedule> schedules;
+
+    public void decreaseOccupiedSeats() {
+        if (this.occupied_seats != null) {
+            this.occupied_seats += 1;
+        }
+    }
 }

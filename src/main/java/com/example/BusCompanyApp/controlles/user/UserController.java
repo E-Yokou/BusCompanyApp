@@ -4,6 +4,7 @@ import com.example.BusCompanyApp.models.Ticket;
 import com.example.BusCompanyApp.models.Trip;
 import com.example.BusCompanyApp.models.User;
 import com.example.BusCompanyApp.services.TicketService;
+import com.example.BusCompanyApp.services.TripService;
 import com.example.BusCompanyApp.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,7 +51,7 @@ public class UserController {
 
     @GetMapping("/user-profile")
     public String userProfile(Model model) {
-        User user = userService.getCurrentUser(); // Предполагается, что этот метод возвращает текущего пользователя
+        User user = userService.getCurrentUser();
         model.addAttribute("user", user);
         return "user/user-profile";
     }
