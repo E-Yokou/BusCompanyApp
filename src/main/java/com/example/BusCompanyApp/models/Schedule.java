@@ -29,6 +29,6 @@ public class Schedule {
 
     @NotNull(message = "Driver is required")
     @ManyToOne
-    @JoinColumn(name = "driver_id", nullable = false)
+    @JoinColumn(name = "driver_id", nullable = true)
     private Driver driver;
 }

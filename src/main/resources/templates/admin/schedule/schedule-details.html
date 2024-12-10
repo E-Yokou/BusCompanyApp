@@ -4,21 +4,50 @@
   <meta charset="UTF-8">
   <title>Детали расписания</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      max-width: 1200px;
+      margin-top: 30px;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #343a40;
+      text-align: center;
+    }
+    .card-header {
+      background-color: #343a40;
+      color: #ffffff;
+    }
+    .card-body {
+      background-color: #f8f9fa;
+    }
+    .btn {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
 <div class="container">
-  <h1>Детали расписания</h1>
+  <h1>Информация о расписании</h1>
 
   <div class="card">
     <div class="card-header">
-      Информация о расписании
+      Основные данные
     </div>
     <div class="card-body">
-      <p><strong>Водитель:</strong> <span th:text="${schedule.driver.firstName} + ' ' + ${schedule.driver.lastName}"></span></p>
+      <p><strong>Водитель:</strong> <span th:text="${schedule.driver != null ? schedule.driver.firstName + ' ' + schedule.driver.lastName : 'No Driver Assigned'}"></span></p>
       <p><strong>Транспортное средство:</strong> <span th:text="${schedule.vehicle.vehicleNumber}"></span></p>
-      <p><strong>Рейс:</strong> <span th:text="${schedule.trip.tripNumber}"></span></p>
+      <p><strong>Номер рейса:</strong> <span th:text="${schedule.trip.tripNumber}"></span></p>
       <p><strong>Маршрут:</strong> <span th:text="${schedule.trip.route.startLocation} + ' - ' + ${schedule.trip.route.endLocation}"></span></p>
-      <p><strong>Количество свободных мест:</strong> <span th:text="${schedule.vehicle.capacity}"></span></p>
+      <p><strong>Отправление:</strong> <span th:text="${schedule.trip.departureLocation}"></span> <strong>Прибытие:</strong> <span th:text="${schedule.trip.destinationLocation}"></span></p>
+      <p><strong>Время:</strong> <span th:text="${#temporals.format(schedule.trip.departureDatetime, 'dd.MM.yyyy HH:mm')}"></span> <strong> -> </strong> <span th:text="${#temporals.format(schedule.trip.arrivalDatetime, 'dd.MM.yyyy HH:mm')}"></span></p>
+      <p><strong>Количество свободных мест:</strong> <span th:text="${schedule.vehicle.capacity - schedule.trip.occupied_seats}"></span></p>
     </div>
   </div>
 

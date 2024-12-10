@@ -1,21 +1,80 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bus Company App</title>
+  <title>Admin Panel - Bus Company App</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .header {
+      background-color: #343a40;
+      color: white;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      margin: 0;
+    }
+
+    .logout-btn {
+      color: white;
+      border: none;
+      margin-left: 10px;
+    }
+
+    .card {
+      transition: transform 0.3s ease;
+      height: 100%;
+      margin-bottom: 20px; /* Bottom margin for spacing */
+      padding: 10px; /* Inner padding for card content */
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      z-index: 10;
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 15px;
+    }
+
+    .row-cols-1 > .col, .row-cols-md-3 > .col {
+      position: relative;
+      margin-bottom: 20px; /* Extra margin for rows */
+    }
+
+    footer {
+      margin-top: 20px;
+      padding: 15px;
+    }
+  </style>
 </head>
+
 <body>
-<div class="container mt-5">
-  <h1 class="text-center mb-4">Bus Company Management</h1>
+<header class="header">
+  <div class="container d-flex justify-content-between align-items-center">
+    <h1>Bus Company Admin Panel</h1>
+    <button class="btn btn-danger logout-btn" onclick="logout()">Выйти</button>
+  </div>
+</header>
+
+<main class="container mt-5">
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col">
       <div class="card text-white bg-secondary mb-3">
         <div class="card-header">Routes</div>
         <div class="card-body">
           <p class="card-text">Manage routes, schedules, and related data.</p>
-          <a href="admin/route/list" class="btn btn-light">View Routes</a>
+          <a href="admin/route/list" class="btn btn-light mt-auto">View Routes</a>
         </div>
       </div>
     </div>
@@ -24,7 +83,7 @@
         <div class="card-header">Trips</div>
         <div class="card-body">
           <p class="card-text">Manage trips, schedules, and related data.</p>
-          <a href="admin/trip/list" class="btn btn-light">View Trips</a>
+          <a href="admin/trip/list" class="btn btn-light mt-auto">View Trips</a>
         </div>
       </div>
     </div>
@@ -33,7 +92,7 @@
         <div class="card-header">Drivers</div>
         <div class="card-body">
           <p class="card-text">View and manage drivers' data.</p>
-          <a href="admin/driver/list" class="btn btn-light">View Drivers</a>
+          <a href="admin/driver/list" class="btn btn-light mt-auto">View Drivers</a>
         </div>
       </div>
     </div>
@@ -42,16 +101,7 @@
         <div class="card-header">Vehicles</div>
         <div class="card-body">
           <p class="card-text">Manage your fleet of vehicles.</p>
-          <a href="admin/vehicle/list" class="btn btn-light">View Vehicles</a>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card text-white bg-danger mb-3">
-        <div class="card-header">Passenger</div>
-        <div class="card-body">
-          <p class="card-text">Manage passenger data and related operations.</p>
-          <a href="passenger/list" class="btn btn-light">View Passengers</a>
+          <a href="admin/vehicle/list" class="btn btn-light mt-auto">View Vehicles</a>
         </div>
       </div>
     </div>
@@ -60,11 +110,20 @@
         <div class="card-header">Schedule</div>
         <div class="card-body">
           <p class="card-text">Manage and view schedules.</p>
-          <a href="admin/schedule/list" class="btn btn-light">View Schedule</a>
+          <a href="admin/schedule/list" class="btn btn-light mt-auto">View Schedule</a>
         </div>
       </div>
     </div>
   </div>
-</div>
+</main>
+
+<footer class="text-center mt-5 py-3 bg-light">
+  <p>2024 Bus Company App.</p>
+</footer>
+<script>
+  function logout() {
+    window.location.href = "/logout";
+  }
+</script>
 </body>
 </html>

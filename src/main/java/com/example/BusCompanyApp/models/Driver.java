@@ -19,17 +19,22 @@ public class Driver {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "First name is required")
+    @NotBlank(message = "Имя обязательное")
+    @Size(max = 50, message = "Имя не должна превышать 50 символов")
     private String firstName;
 
-    @NotBlank(message = "Last name is required")
+    @Size(max = 50, message = "Фамилия не должна превышать 50 символов")
     private String lastName;
 
-    @NotBlank(message = "License number is required")
+    @NotBlank(message = "Номер водительского удостоверения обязателен")
+    @Pattern(regexp = "^(\\d{2}[A-Z]{2}|\\d{4}) \\d{6}$", message = "Номер водительского удостоверения должен соответствовать формату: " +
+            "XX XX YYYYYY, где XX XX — 4-значная серия (цифры или цифры и буквы), а YYYYYY — 6-значный номер.")
     private String licenseNumber;
 
     @OneToMany(mappedBy = "driver")
     private List<Trip> trips;
 
+    @OneToMany(mappedBy = "driver")
+    private List<Schedule> schedules;
 }
 

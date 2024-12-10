@@ -3,6 +3,7 @@ package com.example.BusCompanyApp.repositories;
 import com.example.BusCompanyApp.models.Driver;
 import com.example.BusCompanyApp.models.Trip;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -21,4 +22,8 @@ public interface TripRepository extends JpaRepository<Trip, Long> {
 
     @Query("SELECT DISTINCT t.destinationLocation FROM Trip t WHERE t.destinationLocation LIKE %:query%")
     List<String> findArrivalLocationsByQuery(@Param("query") String query);
+
+    @Modifying
+    @Query("UPDATE Trip t SET t.driver = NULL WHERE t.driver.id = :driverId")
+    void setDriverToNull(@Param("driverId") Long driverId);
 }

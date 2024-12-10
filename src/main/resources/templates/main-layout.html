@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main-list.css">
+  <title th:insert="${title}"></title>
+</head>
+<body>
+<header class="header">
+  <div class="container d-flex justify-content-between align-items-center">
+    <h1>Bus Company Admin Panel</h1>
+    <button class="btn btn-danger logout-btn" onclick="logout()">Выйти</button>
+  </div>
+</header>
+<div class="container">
+  <main th:insert="${content}"></main>
+</div>
+<script>
+  function logout() {
+    window.location.href = "/logout";
+  }
+</script>
+</body>
+</html>

@@ -103,12 +103,10 @@ public class TripController {
 
     @GetMapping("/details/{id}")
     public String getTripDetails(@PathVariable Long id, Model model) {
-        Optional<Trip> trip = tripService.findTripById(id);
-        if (trip.isPresent()) {
-            model.addAttribute("trip", trip.get());
-        } else {
-            return "error";
-        }
+        Trip trip = tripService.findTripById(id)
+                .orElseThrow(() -> new RuntimeException("Trip not found with id " + id));
+
+        model.addAttribute("trip", trip);
         return "admin/trip/trip-details";
     }
 }

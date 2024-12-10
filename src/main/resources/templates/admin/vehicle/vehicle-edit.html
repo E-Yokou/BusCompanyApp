@@ -14,7 +14,7 @@
 
     <div class="form-group">
       <label for="vehicleType">Тип ТС</label>
-      <input type="text" class="form-control" id="vehicleType" th:field="*{vehicleType}" required>
+      <input type="text" class="form-control" id="vehicleType" th:field="*{vehicleType}">
       <div th:if="${#fields.hasErrors('vehicleType')}" class="text-danger">
         <span th:errors="*{vehicleType}"></span>
       </div>
@@ -22,7 +22,7 @@
 
     <div class="form-group">
       <label for="vehicleNumber">Номер ТС</label>
-      <input type="text" class="form-control" id="vehicleNumber" th:field="*{vehicleNumber}" required>
+      <input type="text" class="form-control" id="vehicleNumber" th:field="*{vehicleNumber}">
       <div th:if="${#fields.hasErrors('vehicleNumber')}" class="text-danger">
         <span th:errors="*{vehicleNumber}"></span>
       </div>
@@ -30,7 +30,7 @@
 
     <div class="form-group">
       <label for="capacity">Вместимость</label>
-      <input type="number" class="form-control" id="capacity" th:field="*{capacity}" required>
+      <input type="number" class="form-control" id="capacity" th:field="*{capacity}">
       <div th:if="${#fields.hasErrors('capacity')}" class="text-danger">
         <span th:errors="*{capacity}"></span>
       </div>

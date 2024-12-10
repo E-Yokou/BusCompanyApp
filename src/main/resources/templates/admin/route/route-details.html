@@ -1,61 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Детали маршрута</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-  <style>
-    body {
-      background-color: #f8f9fa;
-    }
-    .container {
-      max-width: 1200px;
-      margin-top: 30px;
-      background-color: #ffffff;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    h1, h3 {
-      color: #343a40;
-      text-align: center;
-    }
-    .form-group label {
-      font-weight: bold;
-    }
-    .btn {
-      margin-top: 20px;
-    }
-    .row {
-      display: flex;
-      justify-content: space-between;
-    }
-    .col-half {
-      width: 48%;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Детали маршрута</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin-top: 30px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #343a40;
+            text-align: center;
+        }
+        .card-header {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+        .card-body {
+            background-color: #f8f9fa;
+        }
+        .btn {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
-  <h1>Информация о маршруте</h1>
-  <div class="row">
-      <h3>Основные данные</h3>
-      <div class="form-group">
-        <label>Место отправления:</label>
-        <p th:text="${route.startLocation}"></p>
-      </div>
+    <h1>Информация о маршруте</h1>
 
-      <div class="form-group">
-        <label>Место назначения:</label>
-        <p th:text="${route.endLocation}"></p>
-      </div>
+    <div class="card">
+        <div class="card-header">
+            Основные данные
+        </div>
+        <div class="card-body">
+            <p><strong>Место отправления:</strong> <span th:text="${route.startLocation}"></span></p>
+            <p><strong>Место назначения:</strong> <span th:text="${route.endLocation}"></span></p>
+            <p><strong>Описание:</strong> <span th:text="${route.description}"></span></p>
+        </div>
+    </div>
 
-      <div class="form-group">
-        <label>Описание:</label>
-        <p th:text="${route.description}"></p>
-      </div>
-  </div>
-  <a th:href="@{'/admin/route/list'}" class="btn btn-secondary btn-block">Назад</a>
+    <a th:href="@{'/admin/route/list'}" class="btn btn-secondary mt-3">Назад</a>
 </div>
 </body>
 </html>

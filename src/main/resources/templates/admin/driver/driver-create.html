@@ -8,7 +8,7 @@
 <div class="container">
   <h1>Добавить нового водителя</h1>
 
-  <form th:action="@{'/admin/driver/create'}" th:object="${drivers}" method="post">
+  <form th:action="@{'/admin/driver/create'}" th:object="${driverDTO}" method="post">
     <div class="form-group">
       <label for="firstName">Имя</label>
       <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required>
@@ -32,7 +32,6 @@
         <span th:errors="*{licenseNumber}"></span>
       </div>
     </div>
-
     <button type="submit" class="btn btn-success">Сохранить</button>
     <a th:href="@{'/admin/driver/list'}" class="btn btn-secondary">Назад</a>
   </form>

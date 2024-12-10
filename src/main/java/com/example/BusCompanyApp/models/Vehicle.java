@@ -17,14 +17,18 @@ public class Vehicle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Vehicle type is required")
+    @NotBlank(message = "Тип транспорта обязателен")
     private String vehicleType;
 
-    @NotBlank(message = "Vehicle number is required")
+    @NotBlank(message = "Гос. номер ТС обязателен")
+    @Pattern(
+            regexp = "^[АВЕКМНОРСТУХ]\\d{3}[АВЕКМНОРСТУХ]{2}\\d{2,3}$",
+            message = "Номер водительского удостоверения должен соответствовать формату: А000ВВ000 или А000ВВ00"
+    )
     private String vehicleNumber;
 
-    @Positive(message = "Capacity must be positive")
+    @Positive(message = "Вместительность должна быть положительная")
     private Integer capacity;
-
 }
+
 

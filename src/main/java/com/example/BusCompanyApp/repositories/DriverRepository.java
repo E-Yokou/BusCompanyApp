@@ -13,4 +13,6 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
             "LOWER(s.lastName) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "CAST(s.licenseNumber AS string) LIKE CONCAT('%', :keyword, '%')")
     List<Driver> searchByKeyword(@Param("keyword") String keyword);
+
+    boolean existsByLicenseNumber(String licenseNumber);
 }

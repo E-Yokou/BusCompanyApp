@@ -16,12 +16,16 @@
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
-    h1, h3 {
+    h1 {
       color: #343a40;
       text-align: center;
     }
-    .form-group label {
-      font-weight: bold;
+    .card-header {
+      background-color: #343a40;
+      color: #ffffff;
+    }
+    .card-body {
+      background-color: #f8f9fa;
     }
     .btn {
       margin-top: 20px;
@@ -31,42 +35,23 @@
 <body>
 <div class="container">
   <h1>Информация о поездке</h1>
-  <div class="form-group">
-    <label>Номер поездки:</label>
-    <p th:text="${trip.tripNumber}"></p>
+
+  <div class="card">
+    <div class="card-header">
+      Основные данные
+    </div>
+    <div class="card-body">
+      <p><strong>Номер поездки:</strong> <span th:text="${trip.tripNumber}"></span></p>
+      <p><strong>Место отправления:</strong> <span th:text="${trip.departureLocation}"></span></p>
+      <p><strong>Место назначения:</strong> <span th:text="${trip.destinationLocation}"></span></p>
+      <p><strong>Дата и время отправления:</strong> <span th:text="${#temporals.format(trip.departureDatetime, 'dd.MM.yyyy HH:mm')}"></span></p>
+      <p><strong>Дата и время прибытия:</strong> <span th:text="${#temporals.format(trip.arrivalDatetime, 'dd.MM.yyyy HH:mm')}"></span></p>
+      <p><strong>Транспортное средство:</strong> <span th:text="${trip.vehicle.vehicleType}"></span></p>
+      <p><strong>Маршрут:</strong> <span th:text="${trip.route.startLocation} + ' - ' + ${trip.route.endLocation}"></span></p>
+    </div>
   </div>
 
-  <div class="form-group">
-    <label>Место отправления:</label>
-    <p th:text="${trip.departureLocation}"></p>
-  </div>
-
-  <div class="form-group">
-    <label>Место назначения:</label>
-    <p th:text="${trip.destinationLocation}"></p>
-  </div>
-
-  <div class="form-group">
-    <label>Дата и время отправления:</label>
-    <p th:text="${trip.departureDatetime}"></p>
-  </div>
-
-  <div class="form-group">
-    <label>Дата и время прибытия:</label>
-    <p th:text="${trip.arrivalDatetime}"></p>
-  </div>
-
-  <div class="form-group">
-    <label>Транспортное средство:</label>
-    <p th:text="${trip.vehicle.vehicleType}"></p>
-  </div>
-
-  <div class="form-group">
-    <label>Маршрут:</label>
-    <p th:text="${trip.route.startLocation} + ' - ' + ${trip.route.endLocation}"></p>
-  </div>
-
-  <a th:href="@{'/admin/trip/list'}" class="btn btn-secondary btn-block">Назад</a>
+  <a th:href="@{'/admin/trip/list'}" class="btn btn-secondary mt-3">Назад</a>
 </div>
 </body>
 </html>

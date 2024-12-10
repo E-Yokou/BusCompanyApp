@@ -32,13 +32,8 @@
 <div class="container">
   <h1>Редактировать водителя</h1>
 
-  <div th:if="${successMessage}" class="alert alert-success">
-    <p th:text="${successMessage}"></p>
-  </div>
-
-  <form th:action="@{'/admin/driver/edit'}" th:object="${drivers}" method="post">
+  <form th:action="@{'/admin/driver/edit'}" th:object="${driverDTO}" method="post">
     <input type="hidden" th:field="*{id}"/>
-
     <div class="form-group">
       <label for="firstName">Имя</label>
       <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required>
@@ -62,7 +57,6 @@
         <span th:errors="*{licenseNumber}"></span>
       </div>
     </div>
-
     <button type="submit" class="btn btn-success btn-block">Сохранить</button>
     <a th:href="@{'/admin/driver/list'}" class="btn btn-secondary btn-block">Назад</a>
   </form>

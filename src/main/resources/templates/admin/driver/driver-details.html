@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -15,35 +16,38 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        h1, h3 {
+        h1 {
             color: #343a40;
             text-align: center;
+        }
+        .card-header {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+        .card-body {
+            background-color: #f8f9fa;
+        }
+        .btn {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 <div class="container">
     <h1>Информация о водителе</h1>
-    <div class="row">
-        <div class="col-half">
-            <h3>Основные данные</h3>
-            <div class="form-group">
-                <label>Фамилия:</label>
-                <p th:text="${driver.firstName}"></p>
-            </div>
 
-            <div class="form-group">
-                <label>Имя:</label>
-                <p th:text="${driver.lastName}"></p>
-            </div>
-
-            <div class="form-group">
-                <label>Удостоверение:</label>
-                <p th:text="${driver.licenseNumber}"></p>
-            </div>
+    <div class="card">
+        <div class="card-header">
+            Основные данные
+        </div>
+        <div class="card-body">
+            <p><strong>Фамилия:</strong> <span th:text="${driver.firstName}"></span></p>
+            <p><strong>Имя:</strong> <span th:text="${driver.lastName}"></span></p>
+            <p><strong>Удостоверение:</strong> <span th:text="${driver.licenseNumber}"></span></p>
         </div>
     </div>
-    <a th:href="@{'/admin/driver/list'}" class="btn btn-secondary btn-block">Назад</a>
+
+    <a th:href="@{'/admin/driver/list'}" class="btn btn-secondary mt-3">Назад</a>
 </div>
 </body>
 </html>

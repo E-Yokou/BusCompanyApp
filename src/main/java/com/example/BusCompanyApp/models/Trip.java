@@ -5,6 +5,8 @@ import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -43,16 +45,16 @@ public class Trip {
     private Vehicle vehicle;
 
     @NotNull(message = "Route is required")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "route_id", nullable = false)
     private Route route;
 
-    @NotNull(message = "Driver is required")
     @ManyToOne
-    @JoinColumn(name = "driver_id", nullable = false)
+    @JoinColumn(name = "driver_id", nullable = true)
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     private Driver driver;
 
-    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)  // Добавлено каскадное удаление
+    @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY)
     private List<Schedule> schedules;
 
     public void decreaseOccupiedSeats() {

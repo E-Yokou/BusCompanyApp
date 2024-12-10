@@ -40,12 +40,8 @@ public class TripService {
     }
 
     @Transactional
-    public void deleteTripById(Long id) {
-        // Найти Trip по ID, если не найден, выбросить исключение
-        Trip tripToDelete = tripRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Trip not found"));
-
-        // Удалить Trip из базы данных
-        tripRepository.delete(tripToDelete);
+    public void deleteTripById(Long tripId) {
+        // Удаляем Trip и связанные Schedule
+        tripRepository.deleteById(tripId);
     }
 }

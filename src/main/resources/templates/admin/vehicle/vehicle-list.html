@@ -4,8 +4,15 @@
   <meta charset="UTF-8">
   <title>Список ТС</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main-list.css">
 </head>
 <body>
+<header class="header">
+  <div class="container d-flex justify-content-between align-items-center">
+    <h1>Bus Company Admin Panel</h1>
+    <button class="btn btn-danger logout-btn" th:href="@{/logout}">Выйти</button>
+  </div>
+</header>
 <div class="container">
   <h1>Список транспортных средств</h1>
 
@@ -43,5 +50,10 @@
     </tbody>
   </table>
 </div>
+<script>
+  function logout() {
+    window.location.href = "/logout";
+  }
+</script>
 </body>
 </html>
