@@ -36,6 +36,7 @@
       <th>Пункт назначения</th>
       <th>Дата и время отправления</th>
       <th>Дата и время прибытия</th>
+      <th>Цена</th>
       <th>Транспорт</th>
       <th>Маршрут</th>
       <th>Количество свободных мест</th>
@@ -51,6 +52,7 @@
       <td th:text="${trip.destinationLocation}"></td>
       <td th:text="${#temporals.format(trip.departureDatetime, 'dd.MM.yyyy HH:mm')}"></td>
       <td th:text="${#temporals.format(trip.arrivalDatetime, 'dd.MM.yyyy HH:mm')}"></td>
+      <td th:text="${trip.price}"></td>
       <td th:text="${trip.vehicle.vehicleType}"></td>
       <td th:text="${trip.route.startLocation} + ' - ' + ${trip.route.endLocation}"></td>
 

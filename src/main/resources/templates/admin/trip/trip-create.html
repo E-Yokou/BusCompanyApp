@@ -35,6 +35,11 @@
     </div>
 
     <div class="form-group">
+      <label for="price">Цена</label>
+      <input type="number" class="form-control" id="price" th:field="*{price}" required>
+    </div>
+
+    <div class="form-group">
       <label for="vehicle">Тип ТС</label>
       <select class="form-control" id="vehicle" th:field="*{vehicle}" required>
         <option th:each="vehicle : ${vehicles}"

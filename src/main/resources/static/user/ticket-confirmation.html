@@ -18,6 +18,13 @@
     <input type="hidden" name="ticketId" th:value="${ticket.id}">
     <button type="submit">Send Ticket</button>
   </form>
+
+  <div th:if="${message}" class="alert alert-success">
+    <p th:text="${message}"></p>
+  </div>
+  <div th:if="${error}" class="alert alert-danger">
+    <p th:text="${error}"></p>
+  </div>
 </div>
 </body>
 </html>

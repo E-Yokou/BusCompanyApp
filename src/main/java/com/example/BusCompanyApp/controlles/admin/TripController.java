@@ -1,9 +1,6 @@
 package com.example.BusCompanyApp.controlles.admin;
 
-import com.example.BusCompanyApp.models.Route;
-import com.example.BusCompanyApp.models.Schedule;
-import com.example.BusCompanyApp.models.Trip;
-import com.example.BusCompanyApp.models.Vehicle;
+import com.example.BusCompanyApp.models.*;
 import com.example.BusCompanyApp.services.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,14 +73,15 @@ public class TripController {
         Optional<Trip> trip = tripService.findTripById(id);
         List<Vehicle> vehicles = vehicleService.findAllVehicles();
         List<Route> routes = routeService.findAllRoutes();
+        List<Driver> drivers = driverService.findAllDrivers();
 
-        model.addAttribute("trip", trip);
+        model.addAttribute("trip", trip.orElseThrow(() -> new RuntimeException("Trip not found")));
         model.addAttribute("vehicles", vehicles);
         model.addAttribute("routes", routes);
+        model.addAttribute("drivers", drivers);
 
         return "admin/trip/trip-edit";
     }
-
 
     @PostMapping("/edit")
     public String editTrip(@Valid @ModelAttribute Trip trip, BindingResult bindingResult, Model model) {
@@ -91,7 +89,22 @@ public class TripController {
             model.addAttribute("trip", trip);
             return "admin/trip/trip-edit";
         }
+
+        // Сохранение изменений в Trip
         tripService.saveTrip(trip);
+
+        // Получаем текущий Schedule для этого Trip
+        Schedule schedule = scheduleService.findScheduleByTrip(trip);
+
+        if (schedule != null) {
+            // Обновляем связанные поля в Schedule
+            schedule.setVehicle(trip.getVehicle());
+            schedule.setDriver(trip.getDriver());
+
+            // Сохраняем изменения в Schedule
+            scheduleService.saveSchedule(schedule);
+        }
+
         return "redirect:/admin/trip/list";
     }
 

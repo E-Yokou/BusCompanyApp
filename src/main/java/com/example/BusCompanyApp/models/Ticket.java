@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "ticket")
 @Data
@@ -27,7 +29,9 @@ public class Ticket {
     @JoinColumn(name = "trip_id", nullable = false)
     private Trip trip;
 
-    @Positive(message = "Price must be positive")
+    private LocalDateTime purchaseDate;
+
+    @Positive(message = "Цена должна быть положительной")
     private Double price;
 }
 

@@ -93,12 +93,32 @@ public class ScheduleController {
 
     @GetMapping("/details/{id}")
     public String getScheduleDetails(@PathVariable Long id, Model model) {
-        Optional<Schedule> schedule = scheduleService.findScheduleById(id);
-        if (schedule.isPresent()) {
-            model.addAttribute("schedule", schedule.get());
-        } else {
+        Schedule schedule = scheduleService.findScheduleById(id)
+                .orElse(null);
+
+        if (schedule == null) {
+            model.addAttribute("errorMessage", "Schedule not found.");
             return "error";
         }
+
+        // Проверки на null для связанных объектов
+        String driverInfo = (schedule.getDriver() != null)
+                ? schedule.getDriver().getFirstName() + " " + schedule.getDriver().getLastName()
+                : "No Driver Assigned";
+
+        String vehicleInfo = (schedule.getVehicle() != null)
+                ? schedule.getVehicle().getVehicleNumber()
+                : "No Vehicle Assigned";
+
+        String tripInfo = (schedule.getTrip() != null)
+                ? schedule.getTrip().getTripNumber()
+                : "No Trip Assigned";
+
+        model.addAttribute("schedule", schedule);
+        model.addAttribute("driverInfo", driverInfo);
+        model.addAttribute("vehicleInfo", vehicleInfo);
+        model.addAttribute("tripInfo", tripInfo);
+
         return "admin/schedule/schedule-details";
     }
 }

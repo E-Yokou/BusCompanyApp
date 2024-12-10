@@ -22,7 +22,13 @@ public class ScheduleService {
     private DriverRepository driverRepository;
 
     public Optional<Schedule> findScheduleById(Long id) {
-        return scheduleRepository.findById(id);
+        return scheduleRepository.findById(id).map(schedule -> {
+            // Инициализация связанных данных, если нужно.
+            if (schedule.getDriver() == null) {
+                schedule.setDriver(new Driver()); // Пример: создать пустой объект для предотвращения ошибок.
+            }
+            return schedule;
+        });
     }
 
     public List<Schedule> findAllSchedules() {
@@ -57,6 +63,10 @@ public class ScheduleService {
         schedule.setVehicle(trip.getVehicle());
 
         scheduleRepository.save(schedule);
+    }
+
+    public Schedule findScheduleByTrip(Trip trip) {
+        return scheduleRepository.findByTrip(trip);
     }
 
     @Transactional

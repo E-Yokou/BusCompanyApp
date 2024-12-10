@@ -55,6 +55,9 @@ public class DriverService {
 
     @Transactional
     public void deleteDriverById(Long driverId) {
+        // Сбрасываем внешний ключ в Trip
+        tripRepository.setDriverToNull(driverId);
+
         // Отвязываем водителя от связанных Schedule
         scheduleRepository.setDriverToNull(driverId);
 

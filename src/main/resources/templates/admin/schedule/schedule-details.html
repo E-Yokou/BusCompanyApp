@@ -41,16 +41,31 @@
       Основные данные
     </div>
     <div class="card-body">
-      <p><strong>Водитель:</strong> <span th:text="${schedule.driver != null ? schedule.driver.firstName + ' ' + schedule.driver.lastName : 'No Driver Assigned'}"></span></p>
-      <p><strong>Транспортное средство:</strong> <span th:text="${schedule.vehicle.vehicleNumber}"></span></p>
-      <p><strong>Номер рейса:</strong> <span th:text="${schedule.trip.tripNumber}"></span></p>
-      <p><strong>Маршрут:</strong> <span th:text="${schedule.trip.route.startLocation} + ' - ' + ${schedule.trip.route.endLocation}"></span></p>
-      <p><strong>Отправление:</strong> <span th:text="${schedule.trip.departureLocation}"></span> <strong>Прибытие:</strong> <span th:text="${schedule.trip.destinationLocation}"></span></p>
-      <p><strong>Время:</strong> <span th:text="${#temporals.format(schedule.trip.departureDatetime, 'dd.MM.yyyy HH:mm')}"></span> <strong> -> </strong> <span th:text="${#temporals.format(schedule.trip.arrivalDatetime, 'dd.MM.yyyy HH:mm')}"></span></p>
-      <p><strong>Количество свободных мест:</strong> <span th:text="${schedule.vehicle.capacity - schedule.trip.occupied_seats}"></span></p>
+      <p><strong>Водитель:</strong>
+        <span th:text="${schedule.driver != null ? schedule.driver.firstName + ' ' + schedule.driver.lastName : 'No Driver Assigned'}">No Driver Assigned</span>
+      </p>
+      <p><strong>Транспортное средство:</strong>
+        <span th:text="${schedule.vehicle != null ? schedule.vehicle.vehicleNumber : 'No Vehicle Assigned'}">No Vehicle Assigned</span>
+      </p>
+      <p><strong>Номер рейса:</strong>
+        <span th:text="${schedule.trip != null ? schedule.trip.tripNumber : 'No Trip Assigned'}">No Trip Assigned</span>
+      </p>
+      <p><strong>Маршрут:</strong>
+        <span th:text="${schedule.trip != null && schedule.trip.route != null ? schedule.trip.route.startLocation + ' - ' + schedule.trip.route.endLocation : 'No Route Assigned'}">No Route Assigned</span>
+      </p>
+      <p><strong>Отправление:</strong>
+        <span th:text="${schedule.trip != null ? schedule.trip.departureLocation : 'Unknown'}">Unknown</span>
+      </p>
+      <p><strong>Время:</strong>
+        <span th:text="${schedule.trip != null && schedule.trip.departureDatetime != null ? #temporals.format(schedule.trip.departureDatetime, 'dd.MM.yyyy HH:mm') : 'Unknown'}">Unknown</span>
+        <strong> -> </strong>
+        <span th:text="${schedule.trip != null && schedule.trip.arrivalDatetime != null ? #temporals.format(schedule.trip.arrivalDatetime, 'dd.MM.yyyy HH:mm') : 'Unknown'}">Unknown</span>
+      </p>
+      <p><strong>Количество свободных мест:</strong>
+        <span th:text="${schedule.vehicle != null && schedule.trip != null ? schedule.vehicle.capacity - schedule.trip.occupiedSeats : 'N/A'}">N/A</span>
+      </p>
     </div>
   </div>
-
   <a th:href="@{'/admin/schedule/list'}" class="btn btn-secondary mt-3">Назад</a>
 </div>
 </body>

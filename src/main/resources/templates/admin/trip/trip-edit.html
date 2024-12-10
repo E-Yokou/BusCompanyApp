@@ -47,6 +47,11 @@
     </div>
 
     <div class="form-group">
+      <label for="price">Цена</label>
+      <input type="number" class="form-control" id="price" th:field="*{price}" required>
+    </div>
+
+    <div class="form-group">
       <label for="vehicle">Транспортное средство</label>
       <select class="form-control" id="vehicle" th:field="*{vehicle.id}" required>
         <option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}" th:text="${vehicle.vehicleType}"></option>
@@ -60,7 +65,15 @@
       </select>
     </div>
 
-
+    <div class="form-group">
+      <label for="route">Водитель</label>
+      <select class="form-control" id="driver" th:field="*{driver.id}" required>
+      <option th:each="driver : ${drivers}"
+              th:value="${driver.id}"
+              th:text="${driver.firstName + ' ' + driver.lastName}">
+      </option>
+    </select>
+    </div>
 
     <button type="submit" class="btn btn-success">Сохранить</button>
     <a th:href="@{'/admin/trip/list'}" class="btn btn-secondary">Назад</a>

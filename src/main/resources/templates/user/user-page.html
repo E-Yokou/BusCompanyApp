@@ -46,19 +46,18 @@
         <span class="place">Осталось мест: <span th:text="${trip.vehicle.capacity - trip.occupied_seats}"></span></span>
       </div>
       <form th:action="@{/user/buy-ticket}" method="post">
+        <span class="price" th:text="${trip.price}"></span>
         <input type="hidden" name="tripId" th:value="${trip.id}">
-        <label for="price">Цена:</label>
-        <input type="number" id="price" name="price" step="0.01" required>
+        <input type="hidden" name="price" th:value="${trip.price}">
         <button type="submit">Купить Билет</button>
       </form>
-
     </div>
     <div th:if="${trips == null || trips.isEmpty()}" class="no-offers">
       <p>Нет доступных маршрутов.</p>
     </div>
   </div>
 </div>
-</body>
+
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const departureInput = document.getElementById("departure");
@@ -87,4 +86,6 @@
             });
   });
 </script>
+
+</body>
 </html>

@@ -59,7 +59,9 @@ public class UserController {
     }
 
     @PostMapping("/buy-ticket")
-    public String buyTicket(@RequestParam("tripId") Long tripId, @RequestParam("price") Double price, Model model) {
+    public String buyTicket(@RequestParam("tripId") Long tripId,
+                            @RequestParam("price") Double price,
+                            Model model) {
         User user = userService.getCurrentUser();
         Ticket ticket = ticketService.buyTicket(tripId, user.getUserId(), price);
         model.addAttribute("ticket", ticket);
@@ -68,11 +70,7 @@ public class UserController {
 
     @PostMapping("/send-ticket")
     public String sendTicket(@RequestParam("email") String email, @RequestParam("ticketId") Long ticketId, Model model) {
-        // Логика отправки билета на email
-        // Например, можно использовать сервис для отправки email
         ticketService.sendTicketEmail(email, ticketId);
-
-        // После отправки билета можно перенаправить пользователя на страницу подтверждения
-        return "redirect:/user/ticket-confirmation";
+        return "redirect:/user/user-profile";
     }
 }

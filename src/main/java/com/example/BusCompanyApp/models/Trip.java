@@ -39,6 +39,9 @@ public class Trip {
     @NotNull(message = "Arrival date and time are required")
     private LocalDateTime arrivalDatetime;
 
+    @Positive(message = "Price must be positive")
+    private Double price;
+
     @NotNull(message = "Vehicle is required")
     @ManyToOne
     @JoinColumn(name = "vehicle_id", nullable = false)
@@ -57,7 +60,7 @@ public class Trip {
     @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY)
     private List<Schedule> schedules;
 
-    public void decreaseOccupiedSeats() {
+    public void incrementOccupiedSeats() {
         if (this.occupied_seats != null) {
             this.occupied_seats += 1;
         }

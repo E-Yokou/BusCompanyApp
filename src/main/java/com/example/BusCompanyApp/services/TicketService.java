@@ -12,6 +12,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -35,12 +36,23 @@ public class TicketService {
         Trip trip = tripRepository.findById(tripId).orElseThrow(() -> new RuntimeException("Trip not found"));
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
 
+        // Check if there are available seats
+        if (trip.getOccupied_seats() != null && trip.getVehicle() != null) {
+            int availableSeats = trip.getVehicle().getCapacity() - trip.getOccupied_seats();
+            if (availableSeats <= 0) {
+                throw new RuntimeException("No available seats for this trip");
+            }
+        } else {
+            throw new RuntimeException("Vehicle capacity or occupied seats is not properly defined");
+        }
+
         Ticket ticket = new Ticket();
         ticket.setUser(user);
         ticket.setTrip(trip);
         ticket.setPrice(price);
+        ticket.setPurchaseDate(LocalDateTime.now());
 
-        trip.decreaseOccupiedSeats();
+        trip.incrementOccupiedSeats();
         tripRepository.save(trip);
 
         return ticketRepository.save(ticket);
@@ -55,11 +67,14 @@ public class TicketService {
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
-        message.setSubject("Your Ticket");
-        message.setText("Your ticket has been purchased successfully!\n" +
-                "Ticket ID: " + ticket.getId() + "\n" +
-                "Trip Number: " + ticket.getTrip().getTripNumber() + "\n" +
-                "Price: " + ticket.getPrice());
+        message.setSubject("Ваш билет");
+        message.setText("Ваш билет успешно куплен!\n" +
+                "Билет ID: " + ticket.getId() + "\n" +
+                "Номер маршрута: " + ticket.getTrip().getTripNumber() + "\n" +
+                "Цена: " + ticket.getPrice() + "₽" + "\n" +
+                "Маршрут: " + ticket.getTrip().getDepartureLocation() + " Куда: " + ticket.getTrip().getDestinationLocation() + "\n" +
+                "Отбытие: " + ticket.getTrip().getDepartureDatetime() + " Прибытие: " + ticket.getTrip().getArrivalDatetime() + "\n" +
+                "Место: " + ticket.getTrip().getOccupied_seats());
 
         mailSender.send(message);
     }

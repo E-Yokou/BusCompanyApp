@@ -114,6 +114,27 @@
         </div>
       </div>
     </div>
+    <div class="col">
+      <div class="card text-white bg-dark mb-3">
+        <div class="card-header">Reports</div>
+        <div class="card-body">
+          <p class="card-text">Generate summary reports.</p>
+          <form action="admin/reports/trips" method="get">
+            <label for="startDate">Start Date:</label>
+            <input type="datetime-local" id="startDate" name="startDate" required>
+            <label for="endDate">End Date:</label>
+            <input type="datetime-local" id="endDate" name="endDate" required>
+            <button type="submit" class="btn btn-light mt-auto">Generate Trips Report</button>
+          </form>
+          <form action="admin/reports/ticket-sales" method="get">
+            <button type="submit" class="btn btn-light mt-auto">Generate Ticket Sales Report</button>
+          </form>
+          <form action="admin/reports/most-popular-routes" method="get">
+            <button type="submit" class="btn btn-light mt-auto">Generate Most Popular Routes Report</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </main>
 
