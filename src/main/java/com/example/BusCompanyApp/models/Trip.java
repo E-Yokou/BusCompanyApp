@@ -9,6 +9,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Entity
@@ -31,7 +32,7 @@ public class Trip {
     @NotBlank(message = "Destination location is required")
     private String destinationLocation;
 
-    private Integer occupied_seats;
+    private Integer occupiedSeats;
 
     @NotNull(message = "Departure date and time are required")
     private LocalDateTime departureDatetime;
@@ -61,8 +62,34 @@ public class Trip {
     private List<Schedule> schedules;
 
     public void incrementOccupiedSeats() {
-        if (this.occupied_seats != null) {
-            this.occupied_seats += 1;
+        if (this.occupiedSeats != null) {
+            this.occupiedSeats += 1;
         }
+    }
+
+    public String getFormattedDepartureDatetime() {
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(departureDatetime);
+    }
+
+    public String getFormattedArrivalDatetime() {
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(arrivalDatetime);
+    }
+
+    @Override
+    public String toString() {
+        return "Trip{" +
+                "id=" + id +
+                ", tripNumber='" + tripNumber + '\'' +
+                ", departureLocation='" + departureLocation + '\'' +
+                ", destinationLocation='" + destinationLocation + '\'' +
+                ", occupiedSeats=" + occupiedSeats +
+                ", departureDatetime=" + departureDatetime +
+                ", arrivalDatetime=" + arrivalDatetime +
+                ", price=" + price +
+                ", vehicle=" + vehicle +
+                ", route=" + route +
+                ", driver=" + driver +
+                ", schedules=" + schedules +
+                '}';
     }
 }

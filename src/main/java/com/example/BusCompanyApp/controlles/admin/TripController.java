@@ -42,10 +42,9 @@ public class TripController {
         model.addAttribute("trip", new Trip());
         model.addAttribute("vehicles", vehicleService.findAllVehicles());
         model.addAttribute("routes", routeService.findAllRoutes());
-        model.addAttribute("drivers", driverService.findAllDrivers()); // Новый сервис
+        model.addAttribute("drivers", driverService.findAllDrivers());
         return "admin/trip/trip-create";
     }
-
 
     @PostMapping("/create")
     public String createTrip(@Valid @ModelAttribute Trip trip, BindingResult bindingResult, Model model) {
@@ -56,7 +55,7 @@ public class TripController {
             return "admin/trip/trip-create";
         }
 
-        trip.setOccupied_seats(0); // Начальное значение
+        trip.setOccupiedSeats(0); // Начальное значение
         tripService.saveTrip(trip);
 
         Schedule schedule = new Schedule();

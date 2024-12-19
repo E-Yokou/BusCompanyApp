@@ -42,13 +42,14 @@
     </div>
     <div class="card-body">
       <p><strong>Номер поездки:</strong> <span th:text="${trip.tripNumber}"></span></p>
+      <p><strong>Маршрут:</strong> <span th:text="${trip.route.startLocation} + ' - ' + ${trip.route.endLocation}"></span></p>
       <p><strong>Место отправления:</strong> <span th:text="${trip.departureLocation}"></span></p>
       <p><strong>Место назначения:</strong> <span th:text="${trip.destinationLocation}"></span></p>
       <p><strong>Дата и время отправления:</strong> <span th:text="${#temporals.format(trip.departureDatetime, 'dd.MM.yyyy HH:mm')}"></span></p>
       <p><strong>Дата и время прибытия:</strong> <span th:text="${#temporals.format(trip.arrivalDatetime, 'dd.MM.yyyy HH:mm')}"></span></p>
+      <p><strong>Транспортное средство:</strong> <span th:text="${trip.vehicle.vehicleNumber}"></span></p>
+      <p><strong>Осталось мест:</strong> <span th:text="${trip.vehicle.capacity - trip.occupiedSeats}"></span></p>
       <p><strong>Цена:</strong> <span th:text="${trip.price}"></span></p>
-      <p><strong>Транспортное средство:</strong> <span th:text="${trip.vehicle.vehicleType}"></span></p>
-      <p><strong>Маршрут:</strong> <span th:text="${trip.route.startLocation} + ' - ' + ${trip.route.endLocation}"></span></p>
     </div>
   </div>
 

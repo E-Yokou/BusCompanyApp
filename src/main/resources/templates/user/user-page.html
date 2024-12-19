@@ -43,7 +43,7 @@
         <span class="route" th:text="${trip.departureLocation} + ' → ' + ${trip.destinationLocation}"></span>
         <span class="departure-time">Отбытие: <span th:text="${#temporals.format(trip.departureDatetime, 'yyyy-MM-dd HH:mm')}"></span></span>
         <span class="arrival-time">Прибытие: <span th:text="${#temporals.format(trip.arrivalDatetime, 'yyyy-MM-dd HH:mm')}"></span></span>
-        <span class="place">Осталось мест: <span th:text="${trip.vehicle.capacity - trip.occupied_seats}"></span></span>
+        <span class="place">Осталось мест: <span th:text="${trip.vehicle.capacity - trip.occupiedSeats}"></span></span>
       </div>
       <form th:action="@{/user/buy-ticket}" method="post">
         <span class="price" th:text="${trip.price}"></span>

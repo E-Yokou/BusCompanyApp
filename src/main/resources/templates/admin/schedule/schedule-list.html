@@ -14,9 +14,12 @@
 </header>
 
 <div class="container">
-    <h1>Список расписаний</h1>
+    <h1>Просмотр расписаний</h1>
     <a th:href="@{'/'}" class="btn btn-secondary mb-3">Вернуться на главную</a>
-    <a th:href="@{'/admin/schedule/create'}" class="btn btn-primary mb-3">Добавить расписание</a>
+
+    <form action="/admin/reports/ticket-sales" method="get">
+        <button type="submit" class="btn btn-info">Прибыль excel</button>
+    </form>
 
     <table class="table">
         <thead>
@@ -25,6 +28,12 @@
             <th>Маршрут</th>
             <th>Транспортное средство</th>
             <th>Водитель</th>
+            <th>Количество мест</th>
+            <th>Количество занятых мест</th>
+            <th>Откуда</th>
+            <th>Куда</th>
+            <th>Время отправления</th>
+            <th>Время прибытия</th>
             <th></th>
             <th></th>
             <th></th>
@@ -36,11 +45,19 @@
             <td th:text="${schedule.trip.route.startLocation} + ' - ' + ${schedule.trip.route.endLocation}"></td>
             <td th:text="${schedule.vehicle.vehicleNumber}"></td>
             <td th:text="${schedule.driver != null ? schedule.driver.firstName + ' ' + schedule.driver.lastName : 'No Driver Assigned'}"></td>
-
+            <td th:text="${schedule.vehicle.capacity}"></td>
+            <td th:text="${schedule.trip.occupiedSeats}"></td>
+            <td th:text="${schedule.trip.departureLocation}"></td>
+            <td th:text="${schedule.trip.destinationLocation}"></td>
+            <td th:text="${#temporals.format(schedule.trip.departureDatetime, 'dd.MM.yyyy HH:mm')}"></td>
+            <td th:text="${#temporals.format(schedule.trip.arrivalDatetime, 'dd.MM.yyyy HH:mm')}"></td>
             <td>
                 <a th:href="@{'/admin/schedule/details/' + ${schedule.id}}" class="btn btn-secondary">Детали</a>
             </td>
-
+            <td>
+                <a th:href="@{/admin/schedule/tickets-sold(tripId=${schedule.trip.id}, date=${#temporals.format(schedule.trip.departureDatetime, 'yyyy-MM-dd')})}"
+                   class="btn btn-info">Скачать Excel</a>
+            </td>
         </tr>
         </tbody>
     </table>

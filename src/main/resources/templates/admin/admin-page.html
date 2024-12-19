@@ -28,11 +28,19 @@
       margin-left: 10px;
     }
 
+    .section-header {
+      margin-top: 30px;
+      margin-bottom: 15px;
+      color: #343a40;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
     .card {
       transition: transform 0.3s ease;
       height: 100%;
-      margin-bottom: 20px; /* Bottom margin for spacing */
-      padding: 10px; /* Inner padding for card content */
+      margin-bottom: 20px;
+      padding: 10px;
     }
 
     .card:hover {
@@ -40,20 +48,8 @@
       z-index: 10;
     }
 
-    .card-body {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 15px;
-    }
-
-    .row-cols-1 > .col, .row-cols-md-3 > .col {
-      position: relative;
-      margin-bottom: 20px; /* Extra margin for rows */
-    }
-
     footer {
-      margin-top: 20px;
+      margin-top: 30px;
       padding: 15px;
     }
   </style>
@@ -62,76 +58,62 @@
 <body>
 <header class="header">
   <div class="container d-flex justify-content-between align-items-center">
-    <h1>Bus Company Admin Panel</h1>
+    <h1>Bus Company | Администрирование</h1>
     <button class="btn btn-danger logout-btn" onclick="logout()">Выйти</button>
   </div>
 </header>
 
 <main class="container mt-5">
+  <!-- Справочники -->
+  <h2 class="section-header">Справочники</h2>
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col">
-      <div class="card text-white bg-secondary mb-3">
-        <div class="card-header">Routes</div>
+      <div class="card text-white bg-secondary">
+        <div class="card-header">Маршруты</div>
         <div class="card-body">
-          <p class="card-text">Manage routes, schedules, and related data.</p>
-          <a href="admin/route/list" class="btn btn-light mt-auto">View Routes</a>
+          <p class="card-text">Управление маршрутами.</p>
+          <a href="admin/route/list" class="btn btn-light mt-auto">Просмотр маршрутов</a>
         </div>
       </div>
     </div>
     <div class="col">
-      <div class="card text-white bg-primary mb-3">
-        <div class="card-header">Trips</div>
+      <div class="card text-white bg-success">
+        <div class="card-header">Водители</div>
         <div class="card-body">
-          <p class="card-text">Manage trips, schedules, and related data.</p>
-          <a href="admin/trip/list" class="btn btn-light mt-auto">View Trips</a>
+          <p class="card-text">Управление водителями.</p>
+          <a href="admin/driver/list" class="btn btn-light mt-auto">Просмотр водителей</a>
         </div>
       </div>
     </div>
     <div class="col">
-      <div class="card text-white bg-success mb-3">
-        <div class="card-header">Drivers</div>
+      <div class="card text-white bg-warning">
+        <div class="card-header">Транспорт</div>
         <div class="card-body">
-          <p class="card-text">View and manage drivers' data.</p>
-          <a href="admin/driver/list" class="btn btn-light mt-auto">View Drivers</a>
+          <p class="card-text">Управление транспортом.</p>
+          <a href="admin/vehicle/list" class="btn btn-light mt-auto">Просмотр транспорта</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Основные -->
+  <h2 class="section-header">Основные</h2>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+      <div class="card text-white bg-primary">
+        <div class="card-header">Поездки</div>
+        <div class="card-body">
+          <p class="card-text">Управление поездки.</p>
+          <a href="admin/trip/list" class="btn btn-light mt-auto">Просмотр поездки</a>
         </div>
       </div>
     </div>
     <div class="col">
-      <div class="card text-white bg-warning mb-3">
-        <div class="card-header">Vehicles</div>
+      <div class="card text-white bg-info">
+        <div class="card-header">Расписание</div>
         <div class="card-body">
-          <p class="card-text">Manage your fleet of vehicles.</p>
-          <a href="admin/vehicle/list" class="btn btn-light mt-auto">View Vehicles</a>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card text-white bg-info mb-3">
-        <div class="card-header">Schedule</div>
-        <div class="card-body">
-          <p class="card-text">Manage and view schedules.</p>
-          <a href="admin/schedule/list" class="btn btn-light mt-auto">View Schedule</a>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card text-white bg-dark mb-3">
-        <div class="card-header">Reports</div>
-        <div class="card-body">
-          <p class="card-text">Generate summary reports.</p>
-          <form action="admin/reports/trips" method="get">
-            <label for="startDate">Start Date:</label>
-            <input type="datetime-local" id="startDate" name="startDate" required>
-            <label for="endDate">End Date:</label>
-            <input type="datetime-local" id="endDate" name="endDate" required>
-            <button type="submit" class="btn btn-light mt-auto">Generate Trips Report</button>
-          </form>
-          <form action="admin/reports/ticket-sales" method="get">
-            <button type="submit" class="btn btn-light mt-auto">Generate Ticket Sales Report</button>
-          </form>
-          <form action="admin/reports/most-popular-routes" method="get">
-            <button type="submit" class="btn btn-light mt-auto">Generate Most Popular Routes Report</button>
-          </form>
+          <p class="card-text">Просмотр расписания.</p>
+          <a href="admin/schedule/list" class="btn btn-light mt-auto">Просмотр расписания</a>
         </div>
       </div>
     </div>
@@ -141,6 +123,7 @@
 <footer class="text-center mt-5 py-3 bg-light">
   <p>2024 Bus Company App.</p>
 </footer>
+
 <script>
   function logout() {
     window.location.href = "/logout";

@@ -12,6 +12,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -37,8 +38,8 @@ public class TicketService {
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
 
         // Check if there are available seats
-        if (trip.getOccupied_seats() != null && trip.getVehicle() != null) {
-            int availableSeats = trip.getVehicle().getCapacity() - trip.getOccupied_seats();
+        if (trip.getOccupiedSeats() != null && trip.getVehicle() != null) {
+            int availableSeats = trip.getVehicle().getCapacity() - trip.getOccupiedSeats();
             if (availableSeats <= 0) {
                 throw new RuntimeException("No available seats for this trip");
             }
@@ -74,8 +75,12 @@ public class TicketService {
                 "Цена: " + ticket.getPrice() + "₽" + "\n" +
                 "Маршрут: " + ticket.getTrip().getDepartureLocation() + " Куда: " + ticket.getTrip().getDestinationLocation() + "\n" +
                 "Отбытие: " + ticket.getTrip().getDepartureDatetime() + " Прибытие: " + ticket.getTrip().getArrivalDatetime() + "\n" +
-                "Место: " + ticket.getTrip().getOccupied_seats());
+                "Место: " + ticket.getTrip().getOccupiedSeats());
 
         mailSender.send(message);
+    }
+
+    public List<Ticket> getTicketsSoldByTripAndDate(Long tripId, LocalDate date) {
+        return ticketRepository.findByTripIdAndPurchaseDate(tripId, date);
     }
 }

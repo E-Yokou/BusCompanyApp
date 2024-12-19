@@ -3,6 +3,7 @@ package com.example.BusCompanyApp.repositories;
 //import com.example.BusCompanyApp.dto.TripReportDTO;
 import com.example.BusCompanyApp.models.Driver;
 import com.example.BusCompanyApp.models.Route;
+import com.example.BusCompanyApp.models.Ticket;
 import com.example.BusCompanyApp.models.Trip;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -42,4 +43,7 @@ public interface TripRepository extends JpaRepository<Trip, Long> {
 
     @Query("SELECT r.startLocation, r.endLocation, COUNT(t) as ticketCount FROM Ticket t JOIN t.trip tr JOIN tr.route r GROUP BY r.startLocation, r.endLocation ORDER BY ticketCount DESC")
     List<Object[]> findMostPopularRoutes();
+
+    @Query("SELECT t FROM Ticket t WHERE t.trip.id = :tripId AND DATE(t.purchaseDate) = :date")
+    List<Ticket> findByTripIdAndPurchaseDate(@Param("tripId") Long tripId, @Param("date") LocalDate date);
 }

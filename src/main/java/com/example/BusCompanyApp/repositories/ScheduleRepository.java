@@ -25,4 +25,5 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
     @Query("UPDATE Schedule s SET s.driver = NULL WHERE s.driver.id = :driverId")
     void setDriverToNull(@Param("driverId") Long driverId);
 
+    List<Schedule> findByTrip_DepartureDatetimeBetween(LocalDateTime start, LocalDateTime end);
 }

@@ -56,16 +56,13 @@
       <td th:text="${trip.vehicle.vehicleType}"></td>
       <td th:text="${trip.route.startLocation} + ' - ' + ${trip.route.endLocation}"></td>
 
-      <td th:text="${trip.vehicle.capacity - trip.occupied_seats}"></td>
+      <td th:text="${trip.vehicle.capacity - trip.occupiedSeats}"></td>
 
       <td>
         <a th:href="@{'/admin/trip/details/' + ${trip.id}}" class="btn btn-info">Подробнее</a>
       </td>
       <td>
         <a th:href="@{'/admin/trip/edit/' + ${trip.id}}" class="btn btn-secondary">Изменить</a>
-      </td>
-      <td>
-        <a th:href="@{'/admin/trip/delete/' + ${trip.id}}" class="btn btn-danger">Удалить</a>
       </td>
     </tr>
     </tbody>

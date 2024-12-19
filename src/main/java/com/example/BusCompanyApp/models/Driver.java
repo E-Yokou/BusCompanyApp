@@ -36,5 +36,15 @@ public class Driver {
 
     @OneToMany(mappedBy = "driver")
     private List<Schedule> schedules;
+
+    @Override
+    public String toString() {
+        return "Driver{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", licenseNumber='" + licenseNumber + '\'' +
+                '}';
+    }
 }
 

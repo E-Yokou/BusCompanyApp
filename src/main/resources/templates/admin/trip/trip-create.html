@@ -44,7 +44,7 @@
       <select class="form-control" id="vehicle" th:field="*{vehicle}" required>
         <option th:each="vehicle : ${vehicles}"
                 th:value="${vehicle.id}"
-                th:text="${vehicle.vehicleType}"></option>
+                th:text="${vehicle.vehicleNumber}"></option>
       </select>
     </div>
 
